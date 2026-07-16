@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投資組合顧問週報 · Portfolio Weekly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   PORTFOLIO WEEKLY · HI-FI TEMPLATE
+   淺色機構級設計系統（沿用「AI 產業鏈週報」design-tokens）
+   架構：window.REPORT_DATA → render() → headless Chrome print A4
+   所有內容 100% 由 JSON 渲染，HTML 內零寫死內容。
+   ============================================================ */
+:root{
+  /* ---- 頁面 / 面板 ---- */
+  --bg-page:#FBFCFD; --bg-panel:#EEF1F5; --bg-card:#FFFFFF; --bg-card-alt:#FAFBFC;
+  --border:#E4E7EC; --border-row:#EDEFF2; --track:#E5E9EF;
+  --shadow-card:0 1px 2px rgba(16,23,37,.04);
+  /* ---- 文字 ---- */
+  --text:#111827; --text-body:#2B3446; --text-muted:#5E6980; --text-faint:#8A93A4; --text-ghost:#AEB6C4;
+  /* ---- 品牌：電光藍（唯一 accent） ---- */
+  --accent:#2F5FE0; --accent-deep:#1E3FAE; --accent-wash:#F2F5FD; --accent-line:#D3E0FA;
+  /* ---- 狀態 ---- */
+  --ok:#12915A; --ok-text:#0E7A4B; --warn:#B07C15; --warn-text:#9A6A0F;
+  --hot:#C4652A; --hot-text:#B0561F; --risk:#CE3B44; --risk-text:#C0343C; --neutral:#8A93A4;
+  /* ---- 本報告新增：紫（估值過熱）+ 灰藍（未變） ---- */
+  --violet:#7A4FD0; --violet-text:#6A3FC0; --violet-wash:#F4F0FC; --violet-line:#E1D6F6;
+  --nblue:#5B6B86; --nblue-text:#4E5C74;
+  /* ---- 字體 ---- */
+  --font-sans:'IBM Plex Sans','Noto Sans TC','Microsoft JhengHei',sans-serif;
+  --font-serif:'Noto Serif TC','Microsoft JhengHei',serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#E8EAEE;color:var(--text);font-family:var(--font-sans);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+@media screen{ body{display:flex;flex-direction:column;align-items:center;gap:20px;padding:24px 0;}
+  .page{box-shadow:0 4px 24px rgba(16,23,37,.12);} }
+@media print{ html,body{background:var(--bg-page);} }
+
+@page{ size:A4 portrait; margin:0; }
+
+/* ---- A4 頁：固定尺寸 + overflow hidden → headless print 恒為 1 頁/區塊 ---- */
+.page{ position:relative; width:794px; height:1122px; overflow:hidden;
+  background:var(--bg-page); padding:40px 46px 58px;
+  display:flex; flex-direction:column; break-after:page; page-break-after:always; }
+.page:last-child{ break-after:auto; page-break-after:auto; }
+
+.num{ font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+.pos{ color:var(--ok); } .neg{ color:var(--risk); }
+
+/* ---- 頁首 run / 頁腳 ---- */
+.prun{ display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:1px solid var(--border); padding-bottom:9px;
+  font:500 9px/1 var(--font-mono); letter-spacing:.12em; color:var(--text-faint); text-transform:uppercase; }
+.pfoot{ position:absolute; left:46px; right:46px; bottom:20px; display:flex; justify-content:space-between;
+  border-top:1px solid var(--border); padding-top:8px;
+  font:400 8px/1 var(--font-mono); letter-spacing:.08em; color:var(--text-ghost); }
+
+/* ---- 封面 ---- */
+.cover{ margin-top:22px; }
+.kicker{ font:600 9px/1 var(--font-mono); letter-spacing:.22em; color:var(--text-muted); text-transform:uppercase; }
+.cover__row{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:10px; }
+.cover__title{ font:700 32px/1.05 var(--font-serif); color:var(--text); }
+.cover__sub{ font:500 15px/1 var(--font-sans); color:var(--text-muted); margin-top:4px; }
+.cover__meta{ text-align:right; font:400 9px/1.85 var(--font-mono); color:var(--text-muted); }
+.cover__meta b{ color:var(--text); font-weight:600; }
+
+/* ---- 卡片 ---- */
+.card{ background:var(--bg-card); border:1px solid var(--border); border-radius:8px;
+  padding:16px 18px; box-shadow:var(--shadow-card); }
+.card--accent{ border-left:3px solid var(--accent); }
+
+/* ---- verdict：最顯眼 ---- */
+.verdict{ margin-top:16px; background:var(--accent-wash); border-color:var(--accent-line); box-shadow:none; }
+.verdict__txt{ font:600 17px/1.5 var(--font-serif); color:#0F1626; margin-top:7px; }
+
+/* ---- banner（條件式） ---- */
+.banner{ display:flex; align-items:flex-start; gap:11px; border:1px solid var(--border);
+  border-radius:6px; padding:10px 13px; margin-top:12px; }
+.banner__tag{ flex:none; font:600 9px/1.4 var(--font-mono); letter-spacing:.08em;
+  padding:4px 8px; border-radius:4px; white-space:nowrap; }
+.banner__body{ font:400 11px/1.55 var(--font-sans); color:var(--text-body); }
+.banner__body b{ color:var(--text); }
+.banner__body .badge{ margin:0 2px; }
+.banner__sub{ display:block; color:var(--text-muted); margin-top:5px; font-size:10.5px; }
+.banner--warn{ background:#FBF6E9; border-color:#EBDCBB; }
+.banner--warn .banner__tag{ background:rgba(176,124,21,.14); color:var(--warn-text); }
+.banner--info{ background:var(--accent-wash); border-color:var(--accent-line); }
+.banner--info .banner__tag{ background:rgba(47,95,224,.12); color:var(--accent-deep); }
+
+/* ---- section 標題 ---- */
+.sec{ display:flex; align-items:center; gap:9px; margin-top:20px; margin-bottom:11px; }
+.sec__k{ font:600 9px/1 var(--font-mono); letter-spacing:.14em; color:var(--accent); white-space:nowrap; }
+.sec__t{ font:600 15px/1 var(--font-serif); color:var(--text); white-space:nowrap; }
+.sec__rule{ flex:1; height:1px; background:var(--border); }
+.sec__n{ font:500 9px/1 var(--font-mono); color:var(--text-faint); white-space:nowrap; }
+
+/* ---- 資產配置 ---- */
+.alloc{ display:grid; grid-template-columns:210px 1fr; gap:22px; align-items:center; }
+.donut{ position:relative; width:200px; height:200px; margin:0 auto; }
+.donut__c{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none; }
+.donut__k{ font:600 8px/1 var(--font-mono); letter-spacing:.18em; color:var(--text-faint); }
+.donut__v{ font:600 15px/1.2 var(--font-mono); color:var(--text); margin-top:3px; }
+.sleeves{ display:flex; flex-direction:column; gap:12px; }
+.sleeve__hd{ display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.sleeve__name{ display:flex; align-items:center; gap:7px; font:600 12px/1 var(--font-sans); color:var(--text); }
+.swatch{ width:10px; height:10px; border-radius:3px; display:inline-block; flex:none; }
+.sleeve__stat{ display:flex; align-items:center; gap:6px; font-size:9.5px; color:var(--text-muted); white-space:nowrap; }
+.bar{ position:relative; height:11px; background:var(--track); border-radius:4px; margin-top:6px; }
+.bar__fill{ position:absolute; left:0; top:0; bottom:0; border-radius:4px; }
+.bar__mark{ position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--text); border-radius:1px; }
+.sleeve__val{ font:500 9px/1 var(--font-mono); color:var(--text-faint); margin-top:4px; }
+
+/* ---- 表格（grid） ---- */
+.tbl{ border:1px solid var(--border); border-radius:8px; overflow:hidden; break-inside:avoid; }
+.tr{ display:grid; align-items:center; border-bottom:1px solid var(--border-row); break-inside:avoid; }
+.tr:last-child{ border-bottom:0; }
+.tr--h{ background:var(--bg-panel); }
+.tr--h .td{ font:600 8.5px/1.3 var(--font-mono); letter-spacing:.06em; color:var(--text-faint); text-transform:uppercase; }
+.tr--total{ background:var(--bg-card-alt); }
+.td{ padding:8px 11px; font-size:10.5px; color:var(--text-body); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.td.num{ font-family:var(--font-mono); font-variant-numeric:tabular-nums; text-align:right; }
+.td.tk{ font-family:var(--font-mono); font-weight:600; color:var(--text); }
+.chip{ display:inline-block; font:600 8px/1 var(--font-mono); letter-spacing:.04em; color:var(--text-muted);
+  background:var(--bg-panel); border:1px solid var(--border); border-radius:3px; padding:2px 4px; vertical-align:middle; }
+.tbl__note{ font:400 9px/1.5 var(--font-mono); color:var(--text-faint); margin-top:9px; }
+
+/* ---- badge ---- */
+.badge{ font:600 9px/1 var(--font-mono); letter-spacing:.04em; padding:3px 7px; border-radius:3px;
+  white-space:nowrap; display:inline-flex; align-items:center; gap:4px; }
+.badge--ok{ color:var(--ok-text); background:rgba(18,145,90,.10); border:1px solid rgba(18,145,90,.30); }
+.badge--warn{ color:var(--warn-text); background:rgba(176,124,21,.10); border:1px solid rgba(176,124,21,.30); }
+.badge--hot{ color:var(--hot-text); background:rgba(196,101,42,.10); border:1px solid rgba(196,101,42,.30); }
+.badge--risk{ color:var(--risk-text); background:rgba(206,59,68,.10); border:1px solid rgba(206,59,68,.30); }
+.badge--info{ color:var(--accent); background:rgba(47,95,224,.08); border:1px solid rgba(47,95,224,.30); }
+.badge--mute{ color:var(--text-muted); background:rgba(138,147,164,.10); border:1px solid rgba(138,147,164,.30); }
+.badge--violet{ color:var(--violet-text); background:rgba(122,79,208,.10); border:1px solid rgba(122,79,208,.30); }
+.badge--nblue{ color:var(--nblue-text); background:rgba(91,107,134,.10); border:1px solid rgba(91,107,134,.30); }
+
+/* ---- Thesis 狀態板 ---- */
+.legend{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:12px; }
+.lg{ display:inline-flex; align-items:center; gap:6px; font:500 10px/1 var(--font-sans); color:var(--text-muted); }
+.dot{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+.dot--ok{ background:var(--ok); } .dot--nblue{ background:var(--nblue); } .dot--hot{ background:var(--hot); }
+.dot--risk{ background:var(--risk); } .dot--violet{ background:var(--violet); } .dot--mute{ background:var(--neutral); }
+.tgrid{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
+.tcard{ min-width:0; background:var(--bg-card); border:1px solid var(--border); border-left:3px solid var(--neutral);
+  border-radius:7px; padding:11px 12px; box-shadow:var(--shadow-card); break-inside:avoid; }
+.tcard__hd{ display:flex; align-items:flex-start; justify-content:space-between; gap:6px; margin-bottom:7px; }
+.tcard__tags{ min-width:0; display:flex; align-items:flex-start; gap:5px; flex-wrap:wrap; justify-content:flex-end; }
+.rtag{ font:500 8px/1.3 var(--font-sans); letter-spacing:.02em; color:var(--text-muted);
+  background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; padding:2px 6px; white-space:normal; overflow-wrap:anywhere; }
+.tcard__note{ font:400 10px/1.5 var(--font-sans); color:var(--text-body); }
+.tk{ font:600 12px/1 var(--font-mono); color:var(--text); }
+.tk--lg{ font-size:15px; }
+.tk--sm{ font-size:9.5px; font-weight:500; color:var(--text-muted); }
+
+/* ---- 建議寬卡 ---- */
+.rstack{ display:flex; flex-direction:column; gap:12px; }
+.rcard{ background:var(--bg-card); border:1px solid var(--border); border-radius:8px;
+  padding:13px 15px; box-shadow:var(--shadow-card); break-inside:avoid; }
+.rc__hd{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.rc__lead{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+.rc__wts{ font-size:10px; color:var(--text-muted); }
+.rc__body{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:11px; }
+.rc__k{ font:600 8.5px/1 var(--font-mono); letter-spacing:.12em; color:var(--accent); margin-bottom:5px; }
+.rc__txt{ font:400 10.5px/1.55 var(--font-sans); color:var(--text-body); }
+.rc__rt{ margin-top:11px; background:#FBF6E9; border:1px solid #EBDCBB; border-radius:6px;
+  padding:8px 11px; font:400 10px/1.5 var(--font-sans); color:var(--warn-text); }
+.rc__rt b{ color:var(--warn-text); }
+.rc__fd{ display:flex; align-items:baseline; gap:9px; margin-top:11px;
+  background:var(--accent-wash); border:1px solid var(--accent-line);
+  border-left:3px solid var(--accent); border-radius:6px; padding:8px 11px; }
+.rc__fd-k{ flex:none; font:600 8.5px/1.4 var(--font-mono); letter-spacing:.1em; color:var(--accent-deep); }
+.rc__fd-t{ font:600 10.5px/1.5 var(--font-sans); color:#0F1626; }
+
+/* ---- Scorecard 空狀態 / 風險 / 事件 ---- */
+.empty{ background:var(--bg-card-alt); border:1px dashed #C4CBD6; border-radius:8px; padding:18px 20px; text-align:center; }
+.empty__t{ font:600 13px/1.3 var(--font-sans); color:var(--text); }
+.empty__s{ font:400 10.5px/1.55 var(--font-sans); color:var(--text-muted); margin-top:6px; }
+.tbl--ghost{ opacity:.5; margin-top:10px; }
+.risks{ display:flex; flex-direction:column; gap:7px; }
+.risk{ display:grid; grid-template-columns:26px 1fr; gap:9px; align-items:baseline;
+  background:var(--bg-card); border:1px solid var(--border); border-radius:6px; padding:9px 12px; box-shadow:var(--shadow-card); break-inside:avoid; }
+.risk__n{ font:600 11px/1 var(--font-mono); color:var(--accent); }
+.risk__t{ font:400 10.5px/1.5 var(--font-sans); color:var(--text-body); }
+
+/* ---- 合規 / 方法學 ---- */
+.actions{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
+.action-card{ background:var(--bg-card); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:6px; padding:8px 10px; break-inside:avoid; }
+.action-card__hd{ display:flex; justify-content:space-between; gap:6px; align-items:flex-start; margin-bottom:5px; }
+.action-card__item{ font:600 10px/1.35 var(--font-sans); color:var(--text); }
+.action-card__detail{ font:400 9.5px/1.45 var(--font-sans); color:var(--text-body); }
+.discl{ margin-bottom:12px; }
+.discl__p{ font:400 11px/1.75 var(--font-sans); color:var(--text-body); margin-top:7px; }
+</style>
+</head>
+<body>
+
+<!-- ============ REPORT_DATA（管線每週僅替換此區塊；標記界定，供 render 腳本安全注入） ============ -->
+<script>
+/*__REPORT_DATA_BEGIN__*/
+window.REPORT_DATA = {
+  "report_date": "2026-07-16",
+  "as_of_date": "2026-07-15",
+  "verdict_one_line": "（示範資料）首週建倉基線：Core／AI Strategy 兩個 sleeve 已依計畫分批進場，但現金部位仍大幅超配目標，建議未來 4–6 週分批加碼至目標配置，並持續留意 AI Strategy 三檔的產業集中度。",
+  "degraded_items": [],
+  "redteam": {
+    "reviewed": true,
+    "agree": 3,
+    "reserved": 2,
+    "oppose": 1,
+    "summary": "（示範資料）紅隊本期挑戰 6 項建議：3 項同意、2 項有保留（主因 ETF 重疊分散度被高估、個股停損標準未明確化）、1 項反對（AMD 觀望建議被認為立場模稜兩可）。主筆回應詳見下方各建議卡片的紅隊意見欄。"
+  },
+  "allocation": {
+    "total_usd": 101777.8,
+    "sleeves": [
+      {
+        "name": "Core Long-term",
+        "value": 34050.0,
+        "weight": 0.3346,
+        "target": 0.65
+      },
+      {
+        "name": "AI Strategy",
+        "value": 16125.0,
+        "weight": 0.1584,
+        "target": 0.3
+      },
+      {
+        "name": "Cash",
+        "value": 51602.8,
+        "weight": 0.507,
+        "target": 0.05
+      }
+    ]
+  },
+  "holdings": [
+    {
+      "ticker": "VOO",
+      "type": "ETF",
+      "sleeve": "Core Long-term",
+      "qty": 40,
+      "avg_cost": 470.0,
+      "price": 480.0,
+      "mv": 19200.0,
+      "pnl": 400.0,
+      "return_pct": 0.0213,
+      "currency": "USD",
+      "weight": 0.1886
+    },
+    {
+      "ticker": "QQQ",
+      "type": "ETF",
+      "sleeve": "Core Long-term",
+      "qty": 30,
+      "avg_cost": 480.0,
+      "price": 495.0,
+      "mv": 14850.0,
+      "pnl": 450.0,
+      "return_pct": 0.0312,
+      "currency": "USD",
+      "weight": 0.1459
+    },
+    {
+      "ticker": "NVDA",
+      "type": "Stock",
+      "sleeve": "AI Strategy",
+      "qty": 40,
+      "avg_cost": 155.0,
+      "price": 165.0,
+      "mv": 6600.0,
+      "pnl": 400.0,
+      "return_pct": 0.0645,
+      "currency": "USD",
+      "weight": 0.0648
+    },
+    {
+      "ticker": "AVGO",
+      "type": "Stock",
+      "sleeve": "AI Strategy",
+      "qty": 10,
+      "avg_cost": 250.0,
+      "price": 265.0,
+      "mv": 2650.0,
+      "pnl": 150.0,
+      "return_pct": 0.06,
+      "currency": "USD",
+      "weight": 0.026
+    },
+    {
+      "ticker": "SMH",
+      "type": "ETF",
+      "sleeve": "AI Strategy",
+      "qty": 25,
+      "avg_cost": 260.0,
+      "price": 275.0,
+      "mv": 6875.0,
+      "pnl": 375.0,
+      "return_pct": 0.0577,
+      "currency": "USD",
+      "weight": 0.0675
+    }
+  ],
+  "thesis_board": [
+    {
+      "ticker": "VOO",
+      "status": "追蹤",
+      "note": "（示範資料）大盤核心 ETF，追蹤美股大盤曝險，本 v1 不做個股層級 thesis 判定，僅監控費用率與追蹤誤差。"
+    },
+    {
+      "ticker": "QQQ",
+      "status": "追蹤",
+      "note": "（示範資料）追蹤那斯達克 100 科技權重曝險，作為 Core Long-term sleeve 的科技傾斜工具。"
+    },
+    {
+      "ticker": "SMH",
+      "status": "追蹤",
+      "note": "（示範資料）半導體產業 ETF，作為 AI Strategy sleeve 的產業曝險主要工具之一。"
+    },
+    {
+      "ticker": "NVDA",
+      "status": "待驗證",
+      "note": "（示範資料）首週建倉，尚無上週判斷可比較；本期論點：資料中心 GPU 需求延續強勢，待下一期驗證。",
+      "status_reason": "首週基線，且仍在新倉位冷卻期內"
+    },
+    {
+      "ticker": "AVGO",
+      "status": "待驗證",
+      "note": "（示範資料）首週建倉，尚無上週判斷可比較；本期論點：客製化 ASIC 與網通業務為主要成長動能，待下一期驗證。",
+      "status_reason": "首週基線，且仍在新倉位冷卻期內"
+    }
+  ],
+  "recommendations": [
+    {
+      "ticker": "VOO",
+      "action": "增持",
+      "target_weight": 0.45,
+      "current_weight": 0.1886,
+      "diff": 0.2614,
+      "reason": "（示範資料）現金部位嚴重超配目標，建議分 4–6 週逐步將 VOO 加碼至中繼目標，單週申購金額不超過目前現金部位的 15%，避免一次性擇時風險。",
+      "exit": "若大盤出現結構性轉空訊號（例如信用利差大幅擴張）或使用者投資目標改變，暫停加碼計畫並重新檢視。",
+      "redteam_verdict": "同意",
+      "redteam_note": "紅隊同意分批加碼邏輯，未提出反對意見。",
+      "final_decision": "分 4–6 週加碼 VOO 至總部位約 45%，本週先執行第一批。"
+    },
+    {
+      "ticker": "QQQ",
+      "action": "增持",
+      "target_weight": 0.2,
+      "current_weight": 0.1459,
+      "diff": 0.0541,
+      "reason": "（示範資料）作為 Core sleeve 的科技傾斜配置，隨現金部署計畫同步加碼至目標權重。",
+      "exit": "若那斯達克 100 成分股集中度風險（科技七雄權重）明顯升高且使用者風險偏好轉趨保守，暫緩加碼。",
+      "redteam_verdict": "有保留",
+      "redteam_note": "紅隊指出 QQQ 與 VOO 前十大成分股高度重疊，實際分散效果低於權重數字所示，建議在方法學限制中揭露；主筆已在風險清單第 3 項採納此點並揭露重疊風險，但維持加碼判斷不變。",
+      "final_decision": "加碼 QQQ 至總部位約 20%，並在報告中揭露與 VOO 的成分重疊限制。"
+    },
+    {
+      "ticker": "SMH",
+      "action": "加碼",
+      "target_weight": 0.1,
+      "current_weight": 0.0675,
+      "diff": 0.0325,
+      "reason": "（示範資料）半導體 ETF 曝險略低於 AI Strategy sleeve 內部配置比例，小幅加碼以平衡個股與 ETF 曝險比重。",
+      "exit": "若半導體產業出現全面性需求下修訊號（非單一公司事件），重新評估加碼節奏。",
+      "redteam_verdict": "同意",
+      "redteam_note": "紅隊同意小幅加碼幅度合理，未提出反對意見。",
+      "final_decision": "加碼 SMH 至總部位約 10%。"
+    },
+    {
+      "ticker": "NVDA",
+      "action": "持有",
+      "target_weight": 0.0648,
+      "current_weight": 0.0648,
+      "diff": 0.0,
+      "reason": "（示範資料）剛完成建倉且仍在 2–4 週新倉位冷卻期內，本週不建議加碼或減碼，待下一期建立比較基準後再評估。",
+      "exit": "若資料中心 GPU 需求出現明確走弱訊號（例如主要雲端客戶財報下修 CAPEX guidance），啟動 thesis 重新評估。",
+      "redteam_verdict": "有保留",
+      "redteam_note": "紅隊要求明確列出量化停損／減碼觸發點而非僅質化描述；主筆已在 exit 欄補充「CAPEX guidance 下修」作為可觀察觸發條件，但下一期才會補上具體百分比門檻，本期先保留原判斷。",
+      "final_decision": "持有，本週不調整部位。"
+    },
+    {
+      "ticker": "AVGO",
+      "action": "持有",
+      "target_weight": 0.026,
+      "current_weight": 0.026,
+      "diff": 0.0,
+      "reason": "（示範資料）同樣仍在新倉位冷卻期內，本週維持觀察、不調整部位。",
+      "exit": "若客製化 ASIC 主要客戶訂單出現明確遞延或取消訊號，啟動 thesis 重新評估。",
+      "redteam_verdict": "同意",
+      "redteam_note": "紅隊同意冷卻期內維持持有，未提出反對意見。",
+      "final_decision": "持有，本週不調整部位。"
+    },
+    {
+      "ticker": "AMD",
+      "action": "觀望",
+      "target_weight": 0.0,
+      "current_weight": 0.0,
+      "diff": 0.0,
+      "reason": "（示範資料）本週研究列入 AI Strategy 候選標的，但基本面訊號尚不足以立即建議買入，先觀察下一季財報再決定是否納入。",
+      "exit": "若下一季財報顯示資料中心 GPU/加速卡營收明顯超預期成長，重新評估是否納入 AI Strategy sleeve。",
+      "redteam_verdict": "反對",
+      "redteam_note": "紅隊認為「觀望」立場模稜兩可，應更明確地選擇「本週不予考慮」或「啟動正式研究並訂出買入條件」；主筆回應：目前資訊仍不足以二選一，維持觀望並在下一期補上明確的研究時程與買入觸發條件，故不採納立即二選一的要求，原判斷保留。",
+      "final_decision": "觀望，不建立部位；下一期補上明確研究時程。"
+    }
+  ],
+  "prior_recommendations": [],
+  "lookthrough": {
+    "as_of_date": "2026-07-15",
+    "total_usd": 101777.8,
+    "rows": [
+      {
+        "ticker": "NVDA",
+        "components": "直接持股 NVDA（$6,600.00）＋VOO 假設持股權重約 7%（$1,344.00）＋QQQ 假設持股權重約 9%（$1,336.50）＋SMH 假設持股權重約 20%（$1,375.00）。ETF 成分權重為示範假設值，非查詢基金官網之真實資料。",
+        "exposure_usd": 10655.5,
+        "exposure_pct": 0.1047
+      },
+      {
+        "ticker": "AVGO",
+        "components": "直接持股 AVGO（$2,650.00）＋VOO 假設持股權重約 1%（$192.00）＋QQQ 假設持股權重約 2%（$297.00）＋SMH 假設持股權重約 5%（$343.75）。ETF 成分權重為示範假設值，非查詢基金官網之真實資料。",
+        "exposure_usd": 3482.75,
+        "exposure_pct": 0.0342
+      }
+    ],
+    "limitations": "（示範資料）本期僅示範 NVDA、AVGO 兩檔代表性持股的 ETF 穿透估算，VOO／QQQ／SMH 的成分權重採假設性數字，非查詢基金官網最新公開持股之真實結果；正式使用時應改用基金官網或 ETF 提供商公開之最新成分權重重新計算。",
+    "price_reconciliation": "（示範資料）ETF 與個股價格快照皆採 2026-07-15 假設收盤價，幣別統一 USD，無需匯率轉換。"
+  },
+  "user_actions": [
+    {
+      "item": "確認 VOO／QQQ／SMH 分批加碼計畫可否啟動（含每週投入現金上限）",
+      "owner": "使用者",
+      "status": "本週執行",
+      "detail": "（示範資料）顧問已擬定分 4–6 週逐步加碼 Core／AI Strategy sleeve 的節奏，需使用者確認風險承受度與實際可投入現金金額後，才會在下一期記帳流程中執行下單；系統不得自動下單。"
+    },
+    {
+      "item": "更新下一期 price-snapshots.csv",
+      "owner": "系統",
+      "status": "事件後更新",
+      "detail": "（示範資料）下次執行前需重新查詢 5 檔持倉最新收盤價，寫入 price-snapshots.csv，作為下一期報告的唯一價格來源。"
+    },
+    {
+      "item": "核對示範收盤價與實際券商對帳單是否一致",
+      "owner": "使用者（可選）",
+      "status": "資料核對",
+      "detail": "（示範資料）本期價格快照為虛構收盤價，僅供渲染管線展示；正式使用時請與券商帳戶核對實際市值。"
+    }
+  ],
+  "risks": [
+    "（示範資料）現金部位占比逾 50%，若遲遲未依計畫部署，長期報酬可能落後於目標配置下的預期成長路徑（現金拖累風險）。",
+    "（示範資料）AI Strategy 三檔（NVDA／AVGO／SMH）同屬 AI 半導體供應鏈，彼此高度相關，單一產業系統性風險集中度偏高。",
+    "（示範資料）QQQ 與 VOO 前十大成分股高度重疊（科技權值股），實際分散效果低於權重數字所顯示。",
+    "（示範資料）本期為首週基線，尚無歷史資料可驗證顧問判斷的長期有效性，所有 thesis 皆待下一期驗證。"
+  ],
+  "events": [
+    {
+      "date": "2026-07-22",
+      "event": "（示範資料）NVDA 假設性法說會窗口，非真實財報日期",
+      "tickers": "NVDA",
+      "action": "觀察即可，不預先調整倉位"
+    },
+    {
+      "date": "2026-07-30",
+      "event": "（示範資料）AVGO 假設性季報發布窗口，非真實財報日期",
+      "tickers": "AVGO",
+      "action": "觀察財測與毛利率變化，不預先行動"
+    },
+    {
+      "date": "2026-08-05",
+      "event": "（示範資料）假設性聯準會利率決議窗口（FOMC），非真實日期",
+      "tickers": "VOO／QQQ／SMH",
+      "action": "留意利率路徑對成長股估值的影響，不預先減碼"
+    }
+  ],
+  "methodology_notes": "（示範資料）本報告為 fixtures 自動產生之示範內容，損益採簡化未實現口徑（未扣除交易手續費對報酬率之影響），未實作時間加權報酬率（TWR，Time-Weighted Return）；ETF 穿透曝險採假設性成分權重估算，非真實查詢結果；所有標的、價格、事件與紅隊意見均為虛構示範內容。",
+  "compliance": "本報告僅供研究與教育用途，不構成投資建議；最終決策與下單由使用者本人完成。（示範資料）"
+};
+/*__REPORT_DATA_END__*/
+</script>
+
+<div id="app"></div>
+
+<script>
+/* ============ 渲染引擎（100% 由 REPORT_DATA 驅動） ============ */
+const D = window.REPORT_DATA;
+const TOTAL_PAGES = 7;
+
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const pct = (x, d = 1) => (x * 100).toFixed(d) + '%';
+const money = (x) => '$' + Math.round(x).toLocaleString('en-US');
+const signCls = (x) => x > 0 ? 'pos' : (x < 0 ? 'neg' : '');
+const signPfx = (x) => x > 0 ? '+' : '';
+const qtyFmt = (x) => Number(x).toLocaleString('en-US', {maximumFractionDigits: 3});
+const pxFmt  = (x) => Math.abs(x) < 1 ? Number(x).toFixed(4) : Number(x).toFixed(2);
+
+/* sleeve 對應色（圓環與量表共用，色彩編碼一致） */
+const SLEEVE_COLORS = ['#2F5FE0', '#12915A', '#C4652A', '#8A93A4'];
+
+/* Thesis 六態色標（雙重編碼：卡片左緣色條 + 徽章文字） */
+const THESIS = {
+  '強化':     {cls:'ok',     color:'#12915A'},
+  '未變':     {cls:'nblue',  color:'#5B6B86'},
+  '削弱':     {cls:'hot',    color:'#C4652A'},
+  '破壞':     {cls:'risk',   color:'#CE3B44'},
+  '估值過熱': {cls:'violet', color:'#7A4FD0'},
+  '待驗證':   {cls:'mute',   color:'#8A93A4'},
+  '追蹤':     {cls:'mute',   color:'#8A93A4'}
+};
+const thesisMeta = (s) => THESIS[s] || {cls:'mute', color:'#8A93A4'};
+
+/* 紅隊裁決徽章 */
+const VERDICT = {
+  '同意':   {cls:'ok',   sym:'✓'},
+  '有保留': {cls:'warn', sym:'⚠'},
+  '反對':   {cls:'risk', sym:'✗'}
+};
+const verdictMeta = (v) => VERDICT[v] || {cls:'mute', sym:''};
+
+/* 最終決定文字：優先用 final_decision，否則依 action 自動組（觀望/暫緩 → 目標 0%） */
+function finalDecisionText(r) {
+  if (r.final_decision) return r.final_decision;
+  if (r.action === '觀望' || r.action === '暫緩') return `${r.action}，目標 0%`;
+  return `${r.action} 至目標 ${pct(r.target_weight)}`;
+}
+
+/* 動作徽章 */
+const ACTION = {'買入':'info','加碼':'ok','增持':'ok','持有':'mute','觀望':'mute','減碼':'warn','賣出':'risk','清倉':'risk'};
+const actionCls = (a) => ACTION[a] || 'info';
+
+function prun() {
+  return `<div class="prun"><span>個人持倉週報 · Portfolio Weekly</span>` +
+    `<span>${esc(D.report_date)} · 價格截至 ${esc(D.as_of_date)}</span></div>`;
+}
+function foot(n) {
+  return `<div class="pfoot"><span>研究與教育用途，不構成投資建議</span>` +
+    `<span>第 ${n} / ${TOTAL_PAGES} 頁</span></div>`;
+}
+function sec(k, t, n) {
+  return `<div class="sec"><span class="sec__k">${k}</span><b class="sec__t">${t}</b>` +
+    `<span class="sec__rule"></span>${n != null ? `<span class="sec__n">${n}</span>` : ''}</div>`;
+}
+
+/* ---------- PAGE 1 : 封面 / 摘要 / 配置 ---------- */
+function page1() {
+  const rt = D.redteam;
+
+  const degraded = (D.degraded_items && D.degraded_items.length)
+    ? `<div class="banner banner--warn"><span class="banner__tag">⚠️ 資料缺口</span>` +
+      `<span class="banner__body"><b>資料降級警示</b>　${D.degraded_items.map(i => '· ' + esc(i)).join('　')}</span></div>`
+    : '';
+
+  let redteam;
+  if (rt.reviewed) {
+    redteam = `<div class="banner banner--info"><span class="banner__tag">🛡 紅隊</span>` +
+      `<span class="banner__body"><b>經獨立空頭紅隊審查</b>　` +
+      `<span class="badge badge--ok">✓ 同意 ${esc(rt.agree)}</span>` +
+      `<span class="badge badge--warn">⚠ 有保留 ${esc(rt.reserved)}</span>` +
+      `<span class="badge badge--risk">✗ 反對 ${esc(rt.oppose)}</span>` +
+      `<span class="banner__sub">${esc(rt.summary)}</span></span></div>`;
+  } else {
+    redteam = `<div class="banner banner--warn"><span class="banner__tag">⚠️ 未審查</span>` +
+      `<span class="banner__body"><b>本期未經紅隊審查</b>　建議尚未經獨立空頭觀點檢驗，請自行加強盡職調查後再行動。</span></div>`;
+  }
+
+  const bars = D.allocation.sleeves.map((s, i) => {
+    const color = SLEEVE_COLORS[i % SLEEVE_COLORS.length];
+    const hasT = s.target != null;
+    const tgt = hasT ? pct(s.target, 0) : '—';
+    let driftTxt = 'n/a', driftCls = 'mute';
+    if (hasT) {
+      const drift = s.weight - s.target;
+      driftTxt = signPfx(drift) + pct(drift, 1);
+      driftCls = Math.abs(drift) < 0.01 ? 'mute' : (drift > 0 ? 'ok' : 'risk');
+    }
+    const fill = Math.min(100, Math.max(0, s.weight * 100));
+    const mark = hasT ? `<i class="bar__mark" style="left:${Math.min(100, s.target * 100)}%"></i>` : '';
+    return `<div class="sleeve">
+      <div class="sleeve__hd">
+        <span class="sleeve__name"><i class="swatch" style="background:${color}"></i>${esc(s.name)}</span>
+        <span class="sleeve__stat num">實際 ${pct(s.weight)} · 目標 ${tgt} · <span class="badge badge--${driftCls}">偏離 ${driftTxt}</span></span>
+      </div>
+      <div class="bar"><div class="bar__fill" style="width:${fill}%;background:${color}"></div>${mark}</div>
+      <div class="sleeve__val">${money(s.value)}</div>
+    </div>`;
+  }).join('');
+
+  return `<section class="page">
+    ${prun()}
+    <div class="cover">
+      <div class="kicker">AI 投資顧問 · 個人持倉週報</div>
+      <div class="cover__row">
+        <div><div class="cover__title">Portfolio Weekly</div><div class="cover__sub">投資組合顧問週報</div></div>
+        <div class="cover__meta">報告日 ${esc(D.report_date)}<br>價格截至 ${esc(D.as_of_date)}<br>組合總值 <b>${money(D.allocation.total_usd)}</b></div>
+      </div>
+    </div>
+    <div class="card card--accent verdict">
+      <div class="kicker">本週一句話結論</div>
+      <div class="verdict__txt">${esc(D.verdict_one_line)}</div>
+    </div>
+    ${degraded}
+    ${redteam}
+    ${sec('第 01 節', '資產配置', D.allocation.sleeves.length + ' 組')}
+    <div class="alloc">
+      <div class="donut">
+        <canvas id="allocChart" width="200" height="200"></canvas>
+        <div class="donut__c"><span class="donut__k">總值</span><span class="donut__v num">${money(D.allocation.total_usd)}</span></div>
+      </div>
+      <div class="sleeves">${bars}</div>
+    </div>
+    ${foot(1)}
+  </section>`;
+}
+
+/* ---------- PAGE 2 : 持倉明細 ---------- */
+function page2() {
+  const cols = '108px 58px 58px 62px 68px 68px 78px 80px 60px 60px';
+  const head = `<div class="tr tr--h" style="grid-template-columns:${cols}">
+    <div class="td">代號</div><div class="td">類型</div><div class="td">組別</div>
+    <div class="td num">數量</div><div class="td num">均價</div><div class="td num">現價</div>
+    <div class="td num">市值(USD)</div><div class="td num">未實現損益</div><div class="td num">報酬率</div><div class="td num">權重</div></div>`;
+
+  const rows = D.holdings.map(h => {
+    const cur = h.currency !== 'USD' ? ` <span class="chip">${esc(h.currency)}</span>` : '';
+    return `<div class="tr" style="grid-template-columns:${cols}">
+      <div class="td tk">${esc(h.ticker)}${cur}</div>
+      <div class="td">${esc(h.type)}</div>
+      <div class="td">${esc(h.sleeve)}</div>
+      <div class="td num">${qtyFmt(h.qty)}</div>
+      <div class="td num">${pxFmt(h.avg_cost)}</div>
+      <div class="td num">${pxFmt(h.price)}</div>
+      <div class="td num">${money(h.mv)}</div>
+      <div class="td num ${signCls(h.pnl)}">${signPfx(h.pnl)}${money(h.pnl)}</div>
+      <div class="td num ${signCls(h.return_pct)}">${signPfx(h.return_pct)}${pct(h.return_pct)}</div>
+      <div class="td num">${pct(h.weight)}</div></div>`;
+  }).join('');
+
+  const tMv = D.holdings.reduce((a, h) => a + h.mv, 0);
+  const tPnl = D.holdings.reduce((a, h) => a + h.pnl, 0);
+  const total = `<div class="tr tr--total" style="grid-template-columns:${cols}">
+    <div class="td tk">合計</div><div class="td"></div><div class="td"></div>
+    <div class="td"></div><div class="td"></div><div class="td"></div>
+    <div class="td num"><b>${money(tMv)}</b></div>
+    <div class="td num ${signCls(tPnl)}"><b>${signPfx(tPnl)}${money(tPnl)}</b></div>
+    <div class="td"></div><div class="td"></div></div>`;
+
+  return `<section class="page">
+    ${prun()}
+    ${sec('第 02 節', '持倉明細', D.holdings.length + ' 筆')}
+    <div class="tbl">${head}${rows}${total}</div>
+    <div class="tbl__note">非 USD 資產於 Ticker 後標註幣別 chip；所有數值等寬右對齊；正損益綠／負損益紅。市值與損益以 USD 計。</div>
+    ${foot(2)}
+  </section>`;
+}
+
+/* ---------- PAGE 3 : Thesis 狀態板 ---------- */
+function page3() {
+  const legend = [
+    ['強化', 'ok'], ['未變', 'nblue'], ['削弱', 'hot'],
+    ['破壞', 'risk'], ['估值過熱', 'violet'], ['待驗證／追蹤', 'mute']
+  ].map(([k, c]) => `<span class="lg"><i class="dot dot--${c}"></i>${k}</span>`).join('');
+
+  const cards = D.thesis_board.map(t => {
+    const m = thesisMeta(t.status);
+    const reason = t.status_reason ? `<span class="rtag">原因：${esc(t.status_reason)}</span>` : '';
+    return `<div class="tcard" style="border-left-color:${m.color}">
+      <div class="tcard__hd"><span class="tk">${esc(t.ticker)}</span>` +
+      `<span class="tcard__tags"><span class="badge badge--${m.cls}">${esc(t.status)}</span>${reason}</span></div>
+      <div class="tcard__note">${esc(t.note)}</div></div>`;
+  }).join('');
+
+  return `<section class="page">
+    ${prun()}
+    ${sec('第 03 節', 'Thesis 狀態板（投資論點）', D.thesis_board.length + ' 檔')}
+    <div class="legend">${legend}</div>
+    <div class="tgrid">${cards}</div>
+    ${foot(3)}
+  </section>`;
+}
+
+/* ---------- PAGE 4 : AI Strategy 建議 ---------- */
+function page4() {
+  const cards = D.recommendations.map(r => {
+    const v = verdictMeta(r.redteam_verdict);
+    const note = r.redteam_note
+      ? `<div class="rc__rt"><b>紅隊${esc(r.redteam_verdict)}意見：</b>${esc(r.redteam_note)}</div>` : '';
+    return `<div class="rcard">
+      <div class="rc__hd">
+        <div class="rc__lead">
+          <span class="tk tk--lg">${esc(r.ticker)}</span>
+          <span class="badge badge--${actionCls(r.action)}">${esc(r.action)}</span>
+          <span class="rc__wts num">目標 ${pct(r.target_weight)} · 目前 ${pct(r.current_weight)} · 差異 <b class="${signCls(r.diff)}">${signPfx(r.diff)}${pct(r.diff)}</b></span>
+        </div>
+        <span class="badge badge--${v.cls}">紅隊 ${v.sym} ${esc(r.redteam_verdict)}</span>
+      </div>
+      <div class="rc__fd"><span class="rc__fd-k">最終決定</span><span class="rc__fd-t">${esc(finalDecisionText(r))}</span></div>
+      <div class="rc__body">
+        <div><div class="rc__k">理由</div><div class="rc__txt">${esc(r.reason)}</div></div>
+        <div><div class="rc__k">退出條件</div><div class="rc__txt">${esc(r.exit)}</div></div>
+      </div>
+      ${note}
+    </div>`;
+  }).join('');
+
+  return `<section class="page">
+    ${prun()}
+    ${sec('第 04 節', 'AI Strategy 建議（終版）', D.recommendations.length + ' 項')}
+    <div class="rstack">${cards}</div>
+    ${foot(4)}
+  </section>`;
+}
+
+/* ---------- PAGE 5 : Scorecard / 風險 / 事件 ---------- */
+function page5() {
+  const scols = '1fr 88px 1.2fr 1.2fr';
+  let score;
+  if (D.prior_recommendations && D.prior_recommendations.length) {
+    const rows = D.prior_recommendations.map(p => `<div class="tr" style="grid-template-columns:${scols}">
+      <div class="td" style="white-space:normal">${esc(p.recommendation)}</div>
+      <div class="td">${esc(p.executed)}</div>
+      <div class="td" style="white-space:normal">${esc(p.result)}</div>
+      <div class="td" style="white-space:normal">${esc(p.revision)}</div></div>`).join('');
+    score = `<div class="tbl"><div class="tr tr--h" style="grid-template-columns:${scols}">
+      <div class="td">上週建議</div><div class="td">是否執行</div><div class="td">迄今結果</div><div class="td">本週修正</div></div>${rows}</div>`;
+  } else {
+    score = `<div class="empty">
+      <div class="empty__t">首週基線 · 無歷史建議</div>
+      <div class="empty__s">本期為建立基準，尚無上週建議可供追蹤；下期起此處將呈現「上週建議 / 是否執行 / 迄今結果 / 本週修正」對照。</div>
+    </div>
+    <div class="tbl tbl--ghost"><div class="tr tr--h" style="grid-template-columns:${scols}">
+      <div class="td">上週建議</div><div class="td">是否執行</div><div class="td">迄今結果</div><div class="td">本週修正</div></div>
+      <div class="tr" style="grid-template-columns:${scols}"><div class="td">—</div><div class="td">—</div><div class="td">—</div><div class="td">—</div></div></div>`;
+  }
+
+  const risks = D.risks.map((r, i) => `<div class="risk">
+    <span class="risk__n num">${String(i + 1).padStart(2, '0')}</span><span class="risk__t">${esc(r)}</span></div>`).join('');
+
+  const ecols = '92px 1fr 1.1fr 82px';
+  const evHead = `<div class="tr tr--h" style="grid-template-columns:${ecols}">
+    <div class="td">日期</div><div class="td">事件</div><div class="td">影響標的</div><div class="td">需行動</div></div>`;
+  const ev = D.events.map(e => {
+    const needAction = !/觀察|不預先|不行動|no action/i.test(e.action);
+    return `<div class="tr" style="grid-template-columns:${ecols}">
+      <div class="td num">${esc(e.date)}</div>
+      <div class="td" style="white-space:normal">${esc(e.event)}</div>
+      <div class="td tk tk--sm">${esc(e.tickers)}</div>
+      <div class="td"><span class="badge badge--${needAction ? 'warn' : 'mute'}">${needAction ? '需行動' : '觀察'}</span></div></div>`;
+  }).join('');
+
+  return `<section class="page">
+    ${prun()}
+    ${sec('第 05 節', '上週建議追蹤', D.prior_recommendations.length + ' 筆')}
+    ${score}
+    ${sec('第 06 節', '主要風險', D.risks.length + ' 項')}
+    <div class="risks">${risks}</div>
+    ${sec('第 07 節', '下週事件日曆', D.events.length + ' 場')}
+    <div class="tbl">${evHead}${ev}</div>
+    ${foot(5)}
+  </section>`;
+}
+
+/* ---------- PAGE 6 : ETF 穿透 / 價格口徑 ---------- */
+function page6() {
+  const L = D.lookthrough || {rows:[], as_of_date:'—', total_usd:0, limitations:'資料未提供', price_reconciliation:'資料未提供'};
+  const cols = '74px 1fr 88px 76px';
+  const rows = L.rows.map(r => `<div class="tr" style="grid-template-columns:${cols}">
+    <div class="td tk">${esc(r.ticker)}</div>
+    <div class="td" style="white-space:normal">${esc(r.components)}</div>
+    <div class="td num">${money(r.exposure_usd)}</div>
+    <div class="td num">${pct(r.exposure_pct, 2)}</div></div>`).join('');
+  return `<section class="page">
+    ${prun()}
+    ${sec('第 08 節', 'ETF 穿透與公司級曝險', '基線截至 ' + esc(L.as_of_date))}
+    <div class="tbl"><div class="tr tr--h" style="grid-template-columns:${cols}">
+      <div class="td">公司</div><div class="td">曝險組成</div><div class="td">曝險美元</div><div class="td">總資產占比</div></div>${rows}</div>
+    <div class="card discl"><div class="rc__k">資料限制</div><p class="discl__p">${esc(L.limitations)}</p></div>
+    ${sec('第 09 節', '價格口徑核對', null)}
+    <div class="card discl"><p class="discl__p">${esc(L.price_reconciliation)}</p></div>
+    ${foot(6)}
+  </section>`;
+}
+
+/* ---------- PAGE 7 : 使用者行動 / 合規 ---------- */
+function page7() {
+  const actions = (D.user_actions || []).map(a => `<div class="action-card">
+    <div class="action-card__hd"><span class="action-card__item">${esc(a.item)}</span><span class="badge badge--${a.owner === '系統' ? 'info' : 'warn'}">${esc(a.owner)} · ${esc(a.status)}</span></div>
+    <div class="action-card__detail">${esc(a.detail)}</div>
+  </div>`).join('');
+  return `<section class="page">
+    ${prun()}
+    ${sec('第 10 節', '本週使用者行動與系統待辦', (D.user_actions || []).length + ' 項')}
+    <div class="actions">${actions || '<div class="empty"><div class="empty__t">本週無額外行動</div></div>'}</div>
+    ${sec('第 11 節', '合規聲明與方法學限制', null)}
+    <div class="card discl">
+      <div class="rc__k">合規聲明</div>
+      <p class="discl__p">${esc(D.compliance)}</p>
+    </div>
+    <div class="card discl">
+      <div class="rc__k">方法學限制</div>
+      <p class="discl__p">${esc(D.methodology_notes)}</p>
+      <p class="discl__p">· 損益為簡化未實現口徑，未採 TWR；持續出入金情況下報酬率可能失真。</p>
+    </div>
+    ${foot(7)}
+  </section>`;
+}
+
+/* ---------- 掛載 + 圖表 ---------- */
+document.getElementById('app').innerHTML =
+  [page1(), page2(), page3(), page4(), page5(), page6(), page7()].join('');
+
+(function drawChart() {
+  const el = document.getElementById('allocChart');
+  if (el && window.Chart) {
+    const sl = D.allocation.sleeves;
+    new Chart(el.getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: sl.map(s => s.name),
+        datasets: [{
+          data: sl.map(s => +(s.weight * 100).toFixed(2)),
+          backgroundColor: sl.map((s, i) => SLEEVE_COLORS[i % SLEEVE_COLORS.length]),
+          borderColor: '#FFFFFF', borderWidth: 2
+        }]
+      },
+      options: {
+        animation: false, responsive: false, maintainAspectRatio: false, cutout: '64%',
+        plugins: { legend: { display: false }, tooltip: { enabled: false } }
+      }
+    });
+  }
+  /* 供 print 腳本 key on 的旗標：render + 圖表（animation:false → 同步繪製）皆完成 */
+  window.__RENDER_DONE = true;
+})();
+</script>
+</body>
+</html>

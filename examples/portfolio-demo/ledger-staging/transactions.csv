@@ -1,0 +1,9 @@
+txn_id,date,action,ticker,market,asset_type,sleeve,quantity,price,currency,fees,tax,source,confirmed_by_user,notes,reversal_of
+txn_20260601_CASH_01,2026-06-01,deposit,,US,Cash,Cash,,100000,USD,0,0,manual,true,示範：初始入金（示範資料，非真實帳戶）,
+txn_20260602_VOO_01,2026-06-02,buy,VOO,US,ETF,Core Long-term,40,470,USD,0,0,manual,true,示範：買入 VOO（核心長期倉；示範資料）,
+txn_20260603_QQQ_01,2026-06-03,buy,QQQ,US,ETF,Core Long-term,30,480,USD,0,0,manual,true,示範：買入 QQQ（核心長期倉；示範資料）,
+txn_20260604_NVDA_01,2026-06-04,buy,NVDA,US,Stock,AI Strategy,40,155,USD,0,0,manual,true,示範：買入 NVDA（AI策略倉；示範資料）,
+txn_20260605_AVGO_01,2026-06-05,buy,AVGO,US,Stock,AI Strategy,10,250,USD,0,0,manual,true,示範：買入 AVGO（AI策略倉；示範資料）,
+txn_20260608_SMH_01,2026-06-08,buy,SMH,US,ETF,AI Strategy,25,260,USD,0,0,manual,true,示範：買入 SMH（AI策略倉；示範資料）,
+txn_20260615_NVDA_01,2026-06-15,dividend,NVDA,US,Stock,AI Strategy,,4,USD,0,0,manual,true,示範：NVDA 股息入帳（示範資料）,
+txn_20260615_NVDA_02,2026-06-15,tax_withholding,NVDA,US,Stock,AI Strategy,,,USD,0,1.2,manual,true,示範：NVDA 股息扣繳稅款（示範資料）,

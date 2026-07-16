@@ -1,0 +1,275 @@
+{
+  "report_date": "2026-07-16",
+  "as_of_date": "2026-07-15",
+  "verdict_one_line": "（示範資料）首週建倉基線：Core／AI Strategy 兩個 sleeve 已依計畫分批進場，但現金部位仍大幅超配目標，建議未來 4–6 週分批加碼至目標配置，並持續留意 AI Strategy 三檔的產業集中度。",
+  "degraded_items": [],
+  "redteam": {
+    "reviewed": true,
+    "agree": 3,
+    "reserved": 2,
+    "oppose": 1,
+    "summary": "（示範資料）紅隊本期挑戰 6 項建議：3 項同意、2 項有保留（主因 ETF 重疊分散度被高估、個股停損標準未明確化）、1 項反對（AMD 觀望建議被認為立場模稜兩可）。主筆回應詳見下方各建議卡片的紅隊意見欄。"
+  },
+  "allocation": {
+    "total_usd": 101777.8,
+    "sleeves": [
+      {
+        "name": "Core Long-term",
+        "value": 34050.0,
+        "weight": 0.3346,
+        "target": 0.65
+      },
+      {
+        "name": "AI Strategy",
+        "value": 16125.0,
+        "weight": 0.1584,
+        "target": 0.3
+      },
+      {
+        "name": "Cash",
+        "value": 51602.8,
+        "weight": 0.507,
+        "target": 0.05
+      }
+    ]
+  },
+  "holdings": [
+    {
+      "ticker": "VOO",
+      "type": "ETF",
+      "sleeve": "Core Long-term",
+      "qty": 40,
+      "avg_cost": 470.0,
+      "price": 480.0,
+      "mv": 19200.0,
+      "pnl": 400.0,
+      "return_pct": 0.0213,
+      "currency": "USD",
+      "weight": 0.1886
+    },
+    {
+      "ticker": "QQQ",
+      "type": "ETF",
+      "sleeve": "Core Long-term",
+      "qty": 30,
+      "avg_cost": 480.0,
+      "price": 495.0,
+      "mv": 14850.0,
+      "pnl": 450.0,
+      "return_pct": 0.0312,
+      "currency": "USD",
+      "weight": 0.1459
+    },
+    {
+      "ticker": "NVDA",
+      "type": "Stock",
+      "sleeve": "AI Strategy",
+      "qty": 40,
+      "avg_cost": 155.0,
+      "price": 165.0,
+      "mv": 6600.0,
+      "pnl": 400.0,
+      "return_pct": 0.0645,
+      "currency": "USD",
+      "weight": 0.0648
+    },
+    {
+      "ticker": "AVGO",
+      "type": "Stock",
+      "sleeve": "AI Strategy",
+      "qty": 10,
+      "avg_cost": 250.0,
+      "price": 265.0,
+      "mv": 2650.0,
+      "pnl": 150.0,
+      "return_pct": 0.06,
+      "currency": "USD",
+      "weight": 0.026
+    },
+    {
+      "ticker": "SMH",
+      "type": "ETF",
+      "sleeve": "AI Strategy",
+      "qty": 25,
+      "avg_cost": 260.0,
+      "price": 275.0,
+      "mv": 6875.0,
+      "pnl": 375.0,
+      "return_pct": 0.0577,
+      "currency": "USD",
+      "weight": 0.0675
+    }
+  ],
+  "thesis_board": [
+    {
+      "ticker": "VOO",
+      "status": "追蹤",
+      "note": "（示範資料）大盤核心 ETF，追蹤美股大盤曝險，本 v1 不做個股層級 thesis 判定，僅監控費用率與追蹤誤差。"
+    },
+    {
+      "ticker": "QQQ",
+      "status": "追蹤",
+      "note": "（示範資料）追蹤那斯達克 100 科技權重曝險，作為 Core Long-term sleeve 的科技傾斜工具。"
+    },
+    {
+      "ticker": "SMH",
+      "status": "追蹤",
+      "note": "（示範資料）半導體產業 ETF，作為 AI Strategy sleeve 的產業曝險主要工具之一。"
+    },
+    {
+      "ticker": "NVDA",
+      "status": "待驗證",
+      "note": "（示範資料）首週建倉，尚無上週判斷可比較；本期論點：資料中心 GPU 需求延續強勢，待下一期驗證。",
+      "status_reason": "首週基線，且仍在新倉位冷卻期內"
+    },
+    {
+      "ticker": "AVGO",
+      "status": "待驗證",
+      "note": "（示範資料）首週建倉，尚無上週判斷可比較；本期論點：客製化 ASIC 與網通業務為主要成長動能，待下一期驗證。",
+      "status_reason": "首週基線，且仍在新倉位冷卻期內"
+    }
+  ],
+  "recommendations": [
+    {
+      "ticker": "VOO",
+      "action": "增持",
+      "target_weight": 0.45,
+      "current_weight": 0.1886,
+      "diff": 0.2614,
+      "reason": "（示範資料）現金部位嚴重超配目標，建議分 4–6 週逐步將 VOO 加碼至中繼目標，單週申購金額不超過目前現金部位的 15%，避免一次性擇時風險。",
+      "exit": "若大盤出現結構性轉空訊號（例如信用利差大幅擴張）或使用者投資目標改變，暫停加碼計畫並重新檢視。",
+      "redteam_verdict": "同意",
+      "redteam_note": "紅隊同意分批加碼邏輯，未提出反對意見。",
+      "final_decision": "分 4–6 週加碼 VOO 至總部位約 45%，本週先執行第一批。"
+    },
+    {
+      "ticker": "QQQ",
+      "action": "增持",
+      "target_weight": 0.2,
+      "current_weight": 0.1459,
+      "diff": 0.0541,
+      "reason": "（示範資料）作為 Core sleeve 的科技傾斜配置，隨現金部署計畫同步加碼至目標權重。",
+      "exit": "若那斯達克 100 成分股集中度風險（科技七雄權重）明顯升高且使用者風險偏好轉趨保守，暫緩加碼。",
+      "redteam_verdict": "有保留",
+      "redteam_note": "紅隊指出 QQQ 與 VOO 前十大成分股高度重疊，實際分散效果低於權重數字所示，建議在方法學限制中揭露；主筆已在風險清單第 3 項採納此點並揭露重疊風險，但維持加碼判斷不變。",
+      "final_decision": "加碼 QQQ 至總部位約 20%，並在報告中揭露與 VOO 的成分重疊限制。"
+    },
+    {
+      "ticker": "SMH",
+      "action": "加碼",
+      "target_weight": 0.1,
+      "current_weight": 0.0675,
+      "diff": 0.0325,
+      "reason": "（示範資料）半導體 ETF 曝險略低於 AI Strategy sleeve 內部配置比例，小幅加碼以平衡個股與 ETF 曝險比重。",
+      "exit": "若半導體產業出現全面性需求下修訊號（非單一公司事件），重新評估加碼節奏。",
+      "redteam_verdict": "同意",
+      "redteam_note": "紅隊同意小幅加碼幅度合理，未提出反對意見。",
+      "final_decision": "加碼 SMH 至總部位約 10%。"
+    },
+    {
+      "ticker": "NVDA",
+      "action": "持有",
+      "target_weight": 0.0648,
+      "current_weight": 0.0648,
+      "diff": 0.0,
+      "reason": "（示範資料）剛完成建倉且仍在 2–4 週新倉位冷卻期內，本週不建議加碼或減碼，待下一期建立比較基準後再評估。",
+      "exit": "若資料中心 GPU 需求出現明確走弱訊號（例如主要雲端客戶財報下修 CAPEX guidance），啟動 thesis 重新評估。",
+      "redteam_verdict": "有保留",
+      "redteam_note": "紅隊要求明確列出量化停損／減碼觸發點而非僅質化描述；主筆已在 exit 欄補充「CAPEX guidance 下修」作為可觀察觸發條件，但下一期才會補上具體百分比門檻，本期先保留原判斷。",
+      "final_decision": "持有，本週不調整部位。"
+    },
+    {
+      "ticker": "AVGO",
+      "action": "持有",
+      "target_weight": 0.026,
+      "current_weight": 0.026,
+      "diff": 0.0,
+      "reason": "（示範資料）同樣仍在新倉位冷卻期內，本週維持觀察、不調整部位。",
+      "exit": "若客製化 ASIC 主要客戶訂單出現明確遞延或取消訊號，啟動 thesis 重新評估。",
+      "redteam_verdict": "同意",
+      "redteam_note": "紅隊同意冷卻期內維持持有，未提出反對意見。",
+      "final_decision": "持有，本週不調整部位。"
+    },
+    {
+      "ticker": "AMD",
+      "action": "觀望",
+      "target_weight": 0.0,
+      "current_weight": 0.0,
+      "diff": 0.0,
+      "reason": "（示範資料）本週研究列入 AI Strategy 候選標的，但基本面訊號尚不足以立即建議買入，先觀察下一季財報再決定是否納入。",
+      "exit": "若下一季財報顯示資料中心 GPU/加速卡營收明顯超預期成長，重新評估是否納入 AI Strategy sleeve。",
+      "redteam_verdict": "反對",
+      "redteam_note": "紅隊認為「觀望」立場模稜兩可，應更明確地選擇「本週不予考慮」或「啟動正式研究並訂出買入條件」；主筆回應：目前資訊仍不足以二選一，維持觀望並在下一期補上明確的研究時程與買入觸發條件，故不採納立即二選一的要求，原判斷保留。",
+      "final_decision": "觀望，不建立部位；下一期補上明確研究時程。"
+    }
+  ],
+  "prior_recommendations": [],
+  "lookthrough": {
+    "as_of_date": "2026-07-15",
+    "total_usd": 101777.8,
+    "rows": [
+      {
+        "ticker": "NVDA",
+        "components": "直接持股 NVDA（$6,600.00）＋VOO 假設持股權重約 7%（$1,344.00）＋QQQ 假設持股權重約 9%（$1,336.50）＋SMH 假設持股權重約 20%（$1,375.00）。ETF 成分權重為示範假設值，非查詢基金官網之真實資料。",
+        "exposure_usd": 10655.5,
+        "exposure_pct": 0.1047
+      },
+      {
+        "ticker": "AVGO",
+        "components": "直接持股 AVGO（$2,650.00）＋VOO 假設持股權重約 1%（$192.00）＋QQQ 假設持股權重約 2%（$297.00）＋SMH 假設持股權重約 5%（$343.75）。ETF 成分權重為示範假設值，非查詢基金官網之真實資料。",
+        "exposure_usd": 3482.75,
+        "exposure_pct": 0.0342
+      }
+    ],
+    "limitations": "（示範資料）本期僅示範 NVDA、AVGO 兩檔代表性持股的 ETF 穿透估算，VOO／QQQ／SMH 的成分權重採假設性數字，非查詢基金官網最新公開持股之真實結果；正式使用時應改用基金官網或 ETF 提供商公開之最新成分權重重新計算。",
+    "price_reconciliation": "（示範資料）ETF 與個股價格快照皆採 2026-07-15 假設收盤價，幣別統一 USD，無需匯率轉換。"
+  },
+  "user_actions": [
+    {
+      "item": "確認 VOO／QQQ／SMH 分批加碼計畫可否啟動（含每週投入現金上限）",
+      "owner": "使用者",
+      "status": "本週執行",
+      "detail": "（示範資料）顧問已擬定分 4–6 週逐步加碼 Core／AI Strategy sleeve 的節奏，需使用者確認風險承受度與實際可投入現金金額後，才會在下一期記帳流程中執行下單；系統不得自動下單。"
+    },
+    {
+      "item": "更新下一期 price-snapshots.csv",
+      "owner": "系統",
+      "status": "事件後更新",
+      "detail": "（示範資料）下次執行前需重新查詢 5 檔持倉最新收盤價，寫入 price-snapshots.csv，作為下一期報告的唯一價格來源。"
+    },
+    {
+      "item": "核對示範收盤價與實際券商對帳單是否一致",
+      "owner": "使用者（可選）",
+      "status": "資料核對",
+      "detail": "（示範資料）本期價格快照為虛構收盤價，僅供渲染管線展示；正式使用時請與券商帳戶核對實際市值。"
+    }
+  ],
+  "risks": [
+    "（示範資料）現金部位占比逾 50%，若遲遲未依計畫部署，長期報酬可能落後於目標配置下的預期成長路徑（現金拖累風險）。",
+    "（示範資料）AI Strategy 三檔（NVDA／AVGO／SMH）同屬 AI 半導體供應鏈，彼此高度相關，單一產業系統性風險集中度偏高。",
+    "（示範資料）QQQ 與 VOO 前十大成分股高度重疊（科技權值股），實際分散效果低於權重數字所顯示。",
+    "（示範資料）本期為首週基線，尚無歷史資料可驗證顧問判斷的長期有效性，所有 thesis 皆待下一期驗證。"
+  ],
+  "events": [
+    {
+      "date": "2026-07-22",
+      "event": "（示範資料）NVDA 假設性法說會窗口，非真實財報日期",
+      "tickers": "NVDA",
+      "action": "觀察即可，不預先調整倉位"
+    },
+    {
+      "date": "2026-07-30",
+      "event": "（示範資料）AVGO 假設性季報發布窗口，非真實財報日期",
+      "tickers": "AVGO",
+      "action": "觀察財測與毛利率變化，不預先行動"
+    },
+    {
+      "date": "2026-08-05",
+      "event": "（示範資料）假設性聯準會利率決議窗口（FOMC），非真實日期",
+      "tickers": "VOO／QQQ／SMH",
+      "action": "留意利率路徑對成長股估值的影響，不預先減碼"
+    }
+  ],
+  "methodology_notes": "（示範資料）本報告為 fixtures 自動產生之示範內容，損益採簡化未實現口徑（未扣除交易手續費對報酬率之影響），未實作時間加權報酬率（TWR，Time-Weighted Return）；ETF 穿透曝險採假設性成分權重估算，非真實查詢結果；所有標的、價格、事件與紅隊意見均為虛構示範內容。",
+  "compliance": "本報告僅供研究與教育用途，不構成投資建議；最終決策與下單由使用者本人完成。（示範資料）"
+}

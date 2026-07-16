@@ -1,0 +1,159 @@
+/* ============================================================
+   AI 產業鏈週報 · Design Tokens (schema v1.0)
+   用途：Markdown → HTML → Chromium print-to-PDF pipeline
+   頁面：A4 portrait 794×1123px @96dpi, margin 0, 深色滿版
+   ============================================================ */
+
+:root {
+  /* ---- 色彩 · 基底（冷調淺灰白，非米黃；機構級） ---- */
+  --bg-canvas:   #E8EAEE;  /* 螢幕閱讀桌面底（print 時不用） */
+  --bg-page:     #FBFCFD;  /* 頁面底色 */
+  --bg-panel:    #EEF1F5;  /* 表頭 / 次級面板 */
+  --bg-card:     #FFFFFF;  /* 卡片 */
+  --bg-card-alt: #FAFBFC;  /* 表格交錯列 */
+  --bg-stripe:   #F1F3F6;  /* placeholder 條紋 */
+  --border:      #E4E7EC;  /* 卡片邊框 */
+  --border-soft: #E4E7EC;  /* 分隔線 */
+  --border-row:  #EDEFF2;  /* 表格列分隔 */
+  --track:       #E5E9EF;  /* 量表未填充段 */
+  --shadow-card: 0 1px 2px rgba(16,23,37,0.04); /* 卡片微陰影 */
+
+  /* ---- 色彩 · 文字 ---- */
+  --text:        #111827;
+  --text-body:   #2B3446;
+  --text-2nd:    #33405A;
+  --text-muted:  #5E6980;
+  --text-faint:  #8A93A4;
+  --text-ghost:  #AEB6C4;  /* 頁腳 */
+
+  /* ---- 色彩 · 電光藍（唯一品牌 accent，淺底加深以確保對比） ---- */
+  --accent:      #2F5FE0;
+  --accent-text: #2F5FE0;
+  --accent-deep: #1E3FAE;
+  --accent-wash: #F2F5FD;  /* callout 淡藍底 */
+  --accent-line: #D3E0FA;  /* callout 邊框 */
+
+  /* ---- 色彩 · 狀態（少量紅黃綠；-solid 用於填塊，-text 用於淺底上文字） ---- */
+  --ok:     #12915A;  --ok-text:     #0E7A4B;
+  --warn:   #B07C15;  --warn-text:   #9A6A0F;
+  --hot:    #C4652A;  --hot-text:    #B0561F;
+  --risk:   #CE3B44;  --risk-text:   #C0343C;
+  --neutral:#8A93A4;
+  /* 狀態淡底：rgba(<solid>, 0.10) + 1px rgba(<solid>, 0.3)
+     紀律/規則卡：#FCF3F3 底 + #F1D5D6 邊（red wash） */
+
+  /* ---- 熱度五階（heat_level 1–5） ---- */
+  --heat-1: #1E3FAE;  /* 冷 */
+  --heat-2: #2F5FE0;  /* 偏冷 */
+  --heat-3: #8A93A4;  /* 中性 */
+  --heat-4: #C4652A;  /* 偏熱 */
+  --heat-5: #CE3B44;  /* 過熱 */
+
+  /* ---- 字體 ---- */
+  --font-sans:  'IBM Plex Sans', 'Noto Sans TC', sans-serif;   /* 內文 / 數據 */
+  --font-serif: 'Noto Serif TC', serif;                        /* 大標 / verdict（編輯感） */
+  --font-tc:    'Noto Serif TC', serif;                        /* section 標題 */
+  --font-mono:  'IBM Plex Mono', monospace;                    /* 標籤 / badge / kicker */
+
+  /* ---- 字級（A4 @96dpi） ---- */
+  --fs-h1: 46px;   /* 封面主標, weight 900 */
+  --fs-verdict: 24px; /* 一句話判斷, weight 700 */
+  --fs-h2: 26px;   /* section 標題, weight 700 */
+  --fs-card-title: 13px;  /* 卡片標題, weight 600 */
+  --fs-body: 12px; --fs-table: 11.5px;
+  --fs-note: 11px; /* 卡片內說明 */
+  --fs-label: 9px; /* mono 標籤, letter-spacing 0.16em */
+  --fs-foot: 8px;
+
+  /* ---- 幾何 ---- */
+  --page-w: 794px; --page-h: 1123px;
+  --page-pad: 44px 48px 64px;
+  --radius: 8px; --radius-sm: 6px; --radius-badge: 3px;
+  --gap: 12px; --card-pad: 16px 18px;
+}
+
+/* ---- 頁面骨架 ---- */
+@page { size: A4 portrait; margin: 0; }
+html, body { margin: 0; background: var(--bg-canvas);
+  -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@media print { html, body { background: var(--bg-page); } }
+.page {
+  width: var(--page-w); height: var(--page-h); box-sizing: border-box;
+  padding: var(--page-pad); position: relative; overflow: hidden;
+  background: var(--bg-page); color: var(--text);
+  font-family: var(--font-sans);
+  display: flex; flex-direction: column;
+  break-after: page;
+}
+.page__header { display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 1px solid var(--border-soft); padding-bottom: 10px; margin-bottom: 22px;
+  font: 500 9px/1 var(--font-mono); letter-spacing: 0.12em;
+  color: var(--text-faint); text-transform: uppercase; }
+.page__footer { position: absolute; left: 48px; right: 48px; bottom: 22px;
+  display: flex; justify-content: space-between;
+  font: 400 var(--fs-foot)/1 var(--font-mono); letter-spacing: 0.1em; color: var(--text-ghost); }
+.section-kicker { font: 500 10px/1 var(--font-mono); letter-spacing: 0.2em;
+  color: var(--accent); margin-bottom: 6px; }
+.section-title { font: 600 var(--fs-h2)/1.2 var(--font-serif); margin: 0 0 16px; } /* 襯線大標 = 編輯感 */
+.cover-title  { font: 700 var(--fs-h1)/1.05 var(--font-serif); margin: 0; }
+.verdict      { font: 500 var(--fs-verdict)/1.4 var(--font-serif); color: #0F1626; }
+
+/* ---- 卡片 ---- */
+.card { background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: var(--card-pad); box-shadow: var(--shadow-card); }
+.card--accent  { border-left: 3px solid var(--accent); box-shadow: var(--shadow-card); } /* verdict / 重點 */
+.card--callout { background: var(--accent-wash); border-color: var(--accent-line); box-shadow: none; }
+.card--rule    { background: #FCF3F3; border-color: #F1D5D6; box-shadow: none; } /* 紀律/規則 */
+.card--blue    { background: var(--accent-wash); border-color: var(--accent-line); box-shadow: none; }
+.card--red     { background: #FCF3F3; border-color: #F1D5D6; box-shadow: none; }
+
+/* ---- Badge（mono, 全模板統一） ---- */
+.badge { font: 500 9px/1 var(--font-mono); letter-spacing: 0.1em;
+  padding: 3px 8px; border-radius: var(--radius-badge); white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 4px; }
+.badge--ok   { color: var(--ok-text);   background: rgba(18,145,90,0.10); border: 1px solid rgba(18,145,90,0.3); }
+.badge--warn { color: var(--warn-text); background: rgba(176,124,21,0.10); border: 1px solid rgba(176,124,21,0.3); }
+.badge--hot  { color: var(--hot-text);  background: rgba(196,101,42,0.10); border: 1px solid rgba(196,101,42,0.3); }
+.badge--risk { color: var(--risk-text); background: rgba(206,59,68,0.10);  border: 1px solid rgba(206,59,68,0.3); }
+.badge--info { color: var(--accent-text); background: rgba(47,95,224,0.08); border: 1px solid rgba(47,95,224,0.3); }
+.badge--mute { color: var(--text-muted); background: rgba(138,147,164,0.10); border: 1px solid rgba(138,147,164,0.3); }
+/* 語意對應：延續/強化→ok · 削弱→warn · 推翻→risk · 待驗證→mute
+             過熱→risk · 偏熱→hot · 中性→mute · 偏冷/冷→info */
+
+/* ---- 表格（grid-based，非 <table>） ---- */
+.tbl { border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; font-size: var(--fs-table); }
+.tbl__head { background: var(--bg-panel); border-bottom: 1px solid var(--border);
+  font: 500 9px/1 var(--font-mono); letter-spacing: 0.12em; color: var(--text-faint); }
+.tbl__head > div { padding: 9px 14px; }
+.tbl__row { border-bottom: 1px solid var(--border-row); background: var(--bg-card); align-items: center; }
+.tbl__row:last-child { border-bottom: 0; }
+.tbl__row > div { padding: 11px 14px; }
+/* 欄寬用 grid-template-columns 各表自定 */
+
+/* ---- 量表（1–5 段） ---- */
+.meter { display: flex; gap: 3px; }
+.meter > i { height: 4px; flex: 1; border-radius: 2px; background: var(--track); }
+.meter > i.on-ok   { background: var(--ok); }
+.meter > i.on-warn { background: var(--warn); }
+.meter > i.on-hot  { background: var(--hot); }
+.meter > i.on-risk { background: var(--risk); }
+/* 熱度溫度計：16×8px 圓角格，填 heat-N 色 */
+
+/* ---- 圖表資產槽（striped placeholder） ---- */
+.asset-slot { background: repeating-linear-gradient(45deg,
+    var(--bg-card), var(--bg-card) 8px, var(--bg-stripe) 8px, var(--bg-stripe) 16px);
+  border: 1px dashed #C4CBD6; border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  font: 400 10px/2 var(--font-mono); color: var(--text-faint); }
+.asset-slot img { width: 100%; height: 100%; object-fit: contain; } /* 有圖時直接置換 */
+
+/* ---- 連結 ---- */
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+/* ---- 字體載入 ----
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+Chromium print 指令示例：
+chromium --headless --print-to-pdf=out.pdf --no-pdf-header-footer report.html
+---- */

@@ -1,0 +1,188 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://personal-investment-agent/portfolio-monitor/report-data.schema.json",
+  "title": "Portfolio Weekly REPORT_DATA",
+  "description": "Schema for the window.REPORT_DATA object consumed by portfolio-dashboard.template.html.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_date", "as_of_date", "verdict_one_line", "degraded_items", "redteam",
+    "allocation", "holdings", "thesis_board", "recommendations",
+    "prior_recommendations", "lookthrough", "user_actions", "risks", "events", "methodology_notes", "compliance"
+  ],
+  "properties": {
+    "report_date": { "type": "string", "format": "date" },
+    "as_of_date": { "type": "string", "format": "date" },
+    "verdict_one_line": { "type": "string", "minLength": 1 },
+    "degraded_items": { "type": "array", "items": { "type": "string" } },
+    "redteam": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewed", "agree", "reserved", "oppose", "summary"],
+      "properties": {
+        "reviewed": { "type": "boolean" },
+        "agree": { "type": "integer", "minimum": 0 },
+        "reserved": { "type": "integer", "minimum": 0 },
+        "oppose": { "type": "integer", "minimum": 0 },
+        "summary": { "type": "string" }
+      }
+    },
+    "allocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total_usd", "sleeves"],
+      "properties": {
+        "total_usd": { "type": "number", "minimum": 0 },
+        "sleeves": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "value", "weight", "target"],
+            "properties": {
+              "name": { "type": "string" },
+              "value": { "type": "number" },
+              "weight": { "type": "number" },
+              "target": { "type": ["number", "null"] }
+            }
+          }
+        }
+      }
+    },
+    "holdings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ticker", "type", "sleeve", "qty", "avg_cost", "price", "mv", "pnl", "return_pct", "weight", "currency"],
+        "properties": {
+          "ticker": { "type": "string" },
+          "type": { "type": "string" },
+          "sleeve": { "type": "string" },
+          "qty": { "type": "number" },
+          "avg_cost": { "type": "number" },
+          "price": { "type": "number" },
+          "mv": { "type": "number" },
+          "pnl": { "type": "number" },
+          "return_pct": { "type": "number" },
+          "weight": { "type": "number" },
+          "currency": { "type": "string" }
+        }
+      }
+    },
+    "thesis_board": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ticker", "status", "note"],
+        "properties": {
+          "ticker": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["強化", "未變", "削弱", "破壞", "估值過熱", "待驗證", "追蹤"]
+          },
+          "note": { "type": "string" },
+          "status_reason": { "type": "string" }
+        }
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ticker", "action", "target_weight", "current_weight", "diff", "reason", "exit", "redteam_verdict", "redteam_note"],
+        "properties": {
+          "ticker": { "type": "string" },
+          "action": {
+            "type": "string",
+            "enum": ["買入", "加碼", "增持", "持有", "觀望", "減碼", "賣出", "清倉"]
+          },
+          "target_weight": { "type": "number" },
+          "current_weight": { "type": "number" },
+          "diff": { "type": "number" },
+          "reason": { "type": "string" },
+          "exit": { "type": "string" },
+          "redteam_verdict": {
+            "type": "string",
+            "enum": ["同意", "有保留", "反對"]
+          },
+          "redteam_note": { "type": "string" },
+          "final_decision": { "type": "string" }
+        }
+      }
+    },
+    "prior_recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["recommendation", "executed", "result", "revision"],
+        "properties": {
+          "recommendation": { "type": "string" },
+          "executed": { "type": "string" },
+          "result": { "type": "string" },
+          "revision": { "type": "string" }
+        }
+      }
+    },
+    "lookthrough": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["as_of_date", "total_usd", "rows", "limitations", "price_reconciliation"],
+      "properties": {
+        "as_of_date": { "type": "string", "format": "date" },
+        "total_usd": { "type": "number", "minimum": 0 },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ticker", "components", "exposure_usd", "exposure_pct"],
+            "properties": {
+              "ticker": { "type": "string" },
+              "components": { "type": "string" },
+              "exposure_usd": { "type": "number", "minimum": 0 },
+              "exposure_pct": { "type": "number", "minimum": 0 }
+            }
+          }
+        },
+        "limitations": { "type": "string" },
+        "price_reconciliation": { "type": "string" }
+      }
+    },
+    "user_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["item", "owner", "status", "detail"],
+        "properties": {
+          "item": { "type": "string" },
+          "owner": { "type": "string", "enum": ["使用者", "系統", "使用者（可選）"] },
+          "status": { "type": "string", "enum": ["本週執行", "事件後更新", "資料核對"] },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "risks": { "type": "array", "items": { "type": "string" } },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["date", "event", "tickers", "action"],
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "event": { "type": "string" },
+          "tickers": { "type": "string" },
+          "action": { "type": "string" }
+        }
+      }
+    },
+    "methodology_notes": { "type": "string" },
+    "compliance": { "type": "string" }
+  }
+}

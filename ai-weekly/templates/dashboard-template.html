@@ -1,0 +1,537 @@
+<!-- 此檔為設計參考(reference only),渲染管線不使用。實際渲染邏輯見 ai-weekly/scripts/render_report.py。 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+TC:wght@500;600;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+@page { size: A4 portrait; margin: 0; }
+html, body { margin: 0; padding: 0; background: #E8EAEE; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 32px 0; }
+a { color: #2F5FE0; text-decoration: none; }
+a:hover { color: #1E3FAE; text-decoration: underline; }
+@media print { body { gap: 0; padding: 0; background: #FBFCFD; } }
+</style>
+</helmet>
+
+<!-- ============ PAGE 01 · COVER / EXECUTIVE DASHBOARD ============ -->
+<section data-screen-label="P01 Cover Dashboard" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto;break-after:page">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:#8A93A4;text-transform:uppercase;border-bottom:1px solid #111827;padding-bottom:10px">
+    <div style="color:#111827;font-weight:500">AI VALUE CHAIN WEEKLY · ISSUE 028</div>
+    <div>2026-07-06 · 2026-W28</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:36px">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.28em;color:#2F5FE0;margin-bottom:12px">WEEKLY RESEARCH MEMO</div>
+      <h1 style="margin:0;font-size:52px;font-weight:700;letter-spacing:0.01em;line-height:1.05;font-family:'Noto Serif TC',serif">AI 產業鏈週報</h1>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.16em;color:#5E6980;margin-top:10px">AI VALUE CHAIN — WEEKLY STATE OF THE THESIS</div>
+    </div>
+    <div style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;line-height:1.9;letter-spacing:0.08em">
+      SCHEMA v1.0<br>SHAREABLE RESEARCH<br>NOT INVESTMENT ADVICE
+    </div>
+  </div>
+
+  <div style="margin-top:30px;background:#FFFFFF;border:1px solid #E4E7EC;border-left:3px solid #2F5FE0;border-radius:6px;padding:22px 26px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#8A93A4">本週一句話判斷 / ONE-LINE VERDICT</div>
+      <span style="display:{{ labelDisplay }};font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;background:rgba(47,95,224,0.06);border:1px dashed rgba(47,95,224,0.4);padding:1px 5px;border-radius:2px">cover.verdict_one_line</span>
+    </div>
+    <div style="font-size:27px;font-weight:600;line-height:1.4;font-family:'Noto Serif TC',serif;text-wrap:pretty;color:#0F1626">基本面仍在，但價格已搶跑——此刻的紀律是等待，不是追逐。</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px">
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4">AI 基本面狀態</div>
+      <div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;padding:3px 9px;border-radius:3px;color:#0E7A4B;background:rgba(18,145,90,0.10);border:1px solid rgba(18,145,90,0.3)">穩健</span></div>
+      <div style="display:flex;gap:3px"><div style="height:4px;flex:1;border-radius:2px;background:#12915A"></div><div style="height:4px;flex:1;border-radius:2px;background:#12915A"></div><div style="height:4px;flex:1;border-radius:2px;background:#12915A"></div><div style="height:4px;flex:1;border-radius:2px;background:#12915A"></div><div style="height:4px;flex:1;border-radius:2px;background:#E5E9EF"></div></div>
+      <div style="font-size:11px;color:#5E6980;line-height:1.6">需求由付費算力驅動，非純敘事。</div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4">估值狀態</div>
+      <div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;padding:3px 9px;border-radius:3px;color:#9A6A0F;background:rgba(176,124,21,0.10);border:1px solid rgba(176,124,21,0.3)">偏貴</span></div>
+      <div style="display:flex;gap:3px"><div style="height:4px;flex:1;border-radius:2px;background:#B07C15"></div><div style="height:4px;flex:1;border-radius:2px;background:#B07C15"></div><div style="height:4px;flex:1;border-radius:2px;background:#B07C15"></div><div style="height:4px;flex:1;border-radius:2px;background:#E5E9EF"></div><div style="height:4px;flex:1;border-radius:2px;background:#E5E9EF"></div></div>
+      <div style="font-size:11px;color:#5E6980;line-height:1.6">整體 fwd P/E 高於 5 年均值 +1.5σ。</div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4">泡沫風險</div>
+      <div><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;padding:3px 9px;border-radius:3px;color:#B0561F;background:rgba(196,101,42,0.10);border:1px solid rgba(196,101,42,0.3)">中</span></div>
+      <div style="display:flex;gap:3px"><div style="height:4px;flex:1;border-radius:2px;background:#C4652A"></div><div style="height:4px;flex:1;border-radius:2px;background:#C4652A"></div><div style="height:4px;flex:1;border-radius:2px;background:#C4652A"></div><div style="height:4px;flex:1;border-radius:2px;background:#E5E9EF"></div><div style="height:4px;flex:1;border-radius:2px;background:#E5E9EF"></div></div>
+      <div style="font-size:11px;color:#5E6980;line-height:1.6">局部過熱，系統性槓桿仍低。</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:16px 18px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4;margin-bottom:8px">▲ 最強板塊</div>
+      <div style="font-size:17px;font-weight:700;color:#0E7A4B">電力 / 散熱基建</div>
+      <div style="font-size:11px;color:#5E6980;margin-top:6px;line-height:1.6">真實物理瓶頸，訂單能見度 2 年以上，定價權在供給端。</div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:16px 18px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4;margin-bottom:8px">▼ 最需警戒板塊</div>
+      <div style="font-size:17px;font-weight:700;color:#C0343C">光通訊 · AI 應用故事股</div>
+      <div style="font-size:11px;color:#5E6980;margin-top:6px;line-height:1.6">估值領先基本面一個換代週期；單位經濟尚未證明。</div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;background:#F2F5FD;border:1px solid #D3E0FA;border-radius:6px;padding:16px 20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#2F5FE0">本週反共識 / CONTRARIAN VIEW</div>
+      <span style="display:{{ labelDisplay }};font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;background:rgba(47,95,224,0.06);border:1px dashed rgba(47,95,224,0.4);padding:1px 5px;border-radius:2px">cover.contrarian_view</span>
+    </div>
+    <div style="font-size:13.5px;line-height:1.7;color:#2B3446;text-wrap:pretty">市場擔心 CAPEX 見頂；我們認為瓶頸在供給端（電力 / HBM），需求尚未見頂——真正的風險是估值，不是需求。</div>
+  </div>
+
+  <div style="margin-top:auto">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4;margin-bottom:8px">產業鏈溫度一覽 · CHAIN HEAT STRIP</div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px">
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 8px;text-align:center"><div style="width:10px;height:10px;border-radius:50%;background:#C4652A;margin:0 auto 6px"></div><div style="font-size:10.5px;font-weight:600">HBM/DRAM</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#B0561F;margin-top:3px">偏熱</div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 8px;text-align:center"><div style="width:10px;height:10px;border-radius:50%;background:#CE3B44;margin:0 auto 6px"></div><div style="font-size:10.5px;font-weight:600">GPU/ASIC</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#C0343C;margin-top:3px">過熱</div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 8px;text-align:center"><div style="width:10px;height:10px;border-radius:50%;background:#CE3B44;margin:0 auto 6px"></div><div style="font-size:10.5px;font-weight:600">光通訊</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#C0343C;margin-top:3px">過熱</div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 8px;text-align:center"><div style="width:10px;height:10px;border-radius:50%;background:#C4652A;margin:0 auto 6px"></div><div style="font-size:10.5px;font-weight:600">電力/散熱</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#B0561F;margin-top:3px">偏熱</div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 8px;text-align:center"><div style="width:10px;height:10px;border-radius:50%;background:#8A93A4;margin:0 auto 6px"></div><div style="font-size:10.5px;font-weight:600">Cloud CAPEX</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#8A93A4;margin-top:3px">中性</div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 8px;text-align:center"><div style="width:10px;height:10px;border-radius:50%;background:#2F5FE0;margin:0 auto 6px"></div><div style="font-size:10.5px;font-weight:600">AI 應用</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;margin-top:3px">偏冷</div></div>
+    </div>
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>01 / 10</span></div>
+</section>
+
+<!-- ============ PAGE 02 · 產業鏈熱力圖 ============ -->
+<section data-screen-label="P02 產業鏈熱力圖" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto;break-after:page">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E4E7EC;padding-bottom:10px;margin-bottom:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4;text-transform:uppercase"><div>AI VALUE CHAIN WEEKLY · 2026-W28</div><div>02 / 10</div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:6px">SECTION 02</div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6px">
+    <h2 style="font-size:30px;font-weight:600;margin:0;font-family:'Noto Serif TC',serif">AI 產業鏈熱力圖</h2>
+    <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:#5E6980">
+      <span>冷</span>
+      <div style="display:flex;gap:3px"><div style="width:16px;height:8px;border-radius:2px;background:#1E3FAE"></div><div style="width:16px;height:8px;border-radius:2px;background:#2F5FE0"></div><div style="width:16px;height:8px;border-radius:2px;background:#8A93A4"></div><div style="width:16px;height:8px;border-radius:2px;background:#C4652A"></div><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div></div>
+      <span>過熱</span>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#5E6980;margin-bottom:18px">熱度＝市場擁擠度與定價完美度，不等於基本面好壞。過熱代表容錯空間消失。</div>
+  <span style="display:{{ labelDisplay }};font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;background:rgba(47,95,224,0.06);border:1px dashed rgba(47,95,224,0.4);padding:1px 5px;border-radius:2px;margin-bottom:8px">heatmap.rows[] — {position, segment, heat_level 1–5, signal, tickers}</span>
+
+  <div style="display:grid;grid-template-columns:56px 118px 92px 110px 1fr;gap:0;border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;font-size:11.5px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <div style="display:contents;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4">
+      <div style="padding:10px 12px;background:#EEF1F5;border-bottom:1px solid #E4E7EC">位置</div><div style="padding:10px 12px;background:#EEF1F5;border-bottom:1px solid #E4E7EC">板塊</div><div style="padding:10px 12px;background:#EEF1F5;border-bottom:1px solid #E4E7EC">熱度</div><div style="padding:10px 12px;background:#EEF1F5;border-bottom:1px solid #E4E7EC">溫度計</div><div style="padding:10px 12px;background:#EEF1F5;border-bottom:1px solid #E4E7EC">本週關鍵訊號</div>
+    </div>
+    <div style="display:contents">
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;background:#FAFBFC">上游</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-weight:600;background:#FAFBFC">HBM / DRAM</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;background:#FAFBFC"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#B0561F;background:rgba(196,101,42,0.10);border:1px solid rgba(196,101,42,0.3)">偏熱 4</span></div>
+      <div style="padding:16px 12px;border-bottom:1px solid #EDEFF2;background:#FAFBFC"><div style="display:flex;gap:3px"><div style="width:16px;height:8px;border-radius:2px;background:#C4652A"></div><div style="width:16px;height:8px;border-radius:2px;background:#C4652A"></div><div style="width:16px;height:8px;border-radius:2px;background:#C4652A"></div><div style="width:16px;height:8px;border-radius:2px;background:#C4652A"></div><div style="width:16px;height:8px;border-radius:2px;background:#E5E9EF"></div></div></div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;color:#2B3446;line-height:1.55;background:#FAFBFC">HBM4 供給仍緊，DRAM 合約價連三季上行。<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4"> · SK hynix / MU / Samsung</span></div>
+    </div>
+    <div style="display:contents">
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4">中游</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-weight:600">GPU / ASIC</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#C0343C;background:rgba(206,59,68,0.10);border:1px solid rgba(206,59,68,0.3)">過熱 5</span></div>
+      <div style="padding:16px 12px;border-bottom:1px solid #EDEFF2"><div style="display:flex;gap:3px"><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div></div></div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;color:#2B3446;line-height:1.55">出貨動能強，但市場已定價完美執行。<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4"> · NVDA / AVGO / AMD</span></div>
+    </div>
+    <div style="display:contents">
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;background:#FAFBFC">中游</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-weight:600;background:#FAFBFC">光通訊</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;background:#FAFBFC"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#C0343C;background:rgba(206,59,68,0.10);border:1px solid rgba(206,59,68,0.3)">過熱 5</span></div>
+      <div style="padding:16px 12px;border-bottom:1px solid #EDEFF2;background:#FAFBFC"><div style="display:flex;gap:3px"><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div><div style="width:16px;height:8px;border-radius:2px;background:#CE3B44"></div></div></div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;color:#2B3446;line-height:1.55;background:#FAFBFC">800G→1.6T 換代加速，估值領先基本面一個週期。<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4"> · COHR / FN / 光模組族群</span></div>
+    </div>
+    <div style="display:contents">
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4">基建</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-weight:600">電力 / 散熱</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#B0561F;background:rgba(196,101,42,0.10);border:1px solid rgba(196,101,42,0.3)">偏熱 4</span></div>
+      <div style="padding:16px 12px;border-bottom:1px solid #EDEFF2"><div style="display:flex;gap:3px"><div style="width:16px;height:8px;border-radius:2px;background:#C4652A"></div><div style="width:16px;height:8px;border-radius:2px;background:#C4652A"></div><div style="width:16px;height:8px;border-radius:2px;background:#C4652A"></div><div style="width:16px;height:8px;border-radius:2px;background:#C4652A"></div><div style="width:16px;height:8px;border-radius:2px;background:#E5E9EF"></div></div></div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;color:#2B3446;line-height:1.55">電力缺口成為真實瓶頸，訂單能見度 2 年以上。<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4"> · VRT / ETN / 電力設備</span></div>
+    </div>
+    <div style="display:contents">
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;background:#FAFBFC">下游</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;font-weight:600;background:#FAFBFC">Cloud CAPEX</div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;background:#FAFBFC"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#5E6980;background:rgba(138,147,164,0.10);border:1px solid rgba(138,147,164,0.3)">中性 3</span></div>
+      <div style="padding:16px 12px;border-bottom:1px solid #EDEFF2;background:#FAFBFC"><div style="display:flex;gap:3px"><div style="width:16px;height:8px;border-radius:2px;background:#8A93A4"></div><div style="width:16px;height:8px;border-radius:2px;background:#8A93A4"></div><div style="width:16px;height:8px;border-radius:2px;background:#8A93A4"></div><div style="width:16px;height:8px;border-radius:2px;background:#E5E9EF"></div><div style="width:16px;height:8px;border-radius:2px;background:#E5E9EF"></div></div></div>
+      <div style="padding:13px 12px;border-bottom:1px solid #EDEFF2;color:#2B3446;line-height:1.55;background:#FAFBFC">四大雲 guidance 續增，但增速二階導放緩。<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4"> · MSFT / GOOGL / AMZN / META</span></div>
+    </div>
+    <div style="display:contents">
+      <div style="padding:13px 12px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4">下游</div>
+      <div style="padding:13px 12px;font-weight:600">AI 應用</div>
+      <div style="padding:13px 12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#2F5FE0;background:rgba(47,95,224,0.08);border:1px solid rgba(47,95,224,0.3)">偏冷 2</span></div>
+      <div style="padding:16px 12px"><div style="display:flex;gap:3px"><div style="width:16px;height:8px;border-radius:2px;background:#2F5FE0"></div><div style="width:16px;height:8px;border-radius:2px;background:#2F5FE0"></div><div style="width:16px;height:8px;border-radius:2px;background:#E5E9EF"></div><div style="width:16px;height:8px;border-radius:2px;background:#E5E9EF"></div><div style="width:16px;height:8px;border-radius:2px;background:#E5E9EF"></div></div></div>
+      <div style="padding:13px 12px;color:#2B3446;line-height:1.55">收入成長真實，但單位經濟仍未證明。<span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4"> · 應用層 / AI SaaS</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;flex:1;display:flex;flex-direction:column;gap:8px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4">SUPPLY CHAIN MAP · 供應鏈流向圖</div>
+    <div style="flex:1;background:repeating-linear-gradient(45deg,#FFFFFF,#FFFFFF 8px,#F1F3F6 8px,#F1F3F6 16px);border:1px dashed #C4CBD6;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8A93A4;text-align:center;line-height:2">[ asset slot: supply-chain-map.png ]<br>上游 → 中游 → 基建 → 下游 節點圖，節點色 = 熱度色</div>
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>02 / 10</span></div>
+</section>
+
+<!-- ============ PAGE 03 · 與上週判斷的延續 / 修正 ============ -->
+<section data-screen-label="P03 Thesis Tracker" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto;break-after:page">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E4E7EC;padding-bottom:10px;margin-bottom:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4;text-transform:uppercase"><div>AI VALUE CHAIN WEEKLY · 2026-W28</div><div>03 / 10</div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:6px">SECTION 03 · THESIS TRACKER</div>
+  <h2 style="font-size:30px;font-weight:600;margin:0 0 14px;font-family:'Noto Serif TC',serif">與上週判斷的延續 / 修正</h2>
+
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px">
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:12px;text-align:center;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-size:24px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#0E7A4B">3</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-top:4px">● 延續</div></div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:12px;text-align:center;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-size:24px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#0E7A4B">1</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-top:4px">▲ 強化</div></div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:12px;text-align:center;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-size:24px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#9A6A0F">1</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-top:4px">▼ 削弱</div></div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:12px;text-align:center;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-size:24px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#C0343C">0</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-top:4px">✕ 推翻</div></div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:12px;text-align:center;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-size:24px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#5E6980">2</div><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-top:4px">◌ 待驗證</div></div>
+  </div>
+  <span style="display:{{ labelDisplay }};font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;background:rgba(47,95,224,0.06);border:1px dashed rgba(47,95,224,0.4);padding:1px 5px;border-radius:2px;margin-bottom:8px">thesis_tracker.rows[] — {prior_view, status, evidence, thesis_updated}</span>
+
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 18px;display:grid;grid-template-columns:1fr 84px;gap:14px;align-items:start;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div>
+        <div style="font-size:13px;font-weight:600;line-height:1.55">供給瓶頸（電力 / HBM）是本輪週期的真實約束</div>
+        <div style="font-size:11.5px;color:#5E6980;line-height:1.6;margin-top:5px">本週：HBM4 全年產能售罄 + 資料中心 PPA 簽約價續漲。新事實支持原判斷。</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-top:6px">THESIS 更新：否 — 證據同向</div>
+      </div>
+      <span style="justify-self:end;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;padding:3px 8px;border-radius:3px;color:#0E7A4B;background:rgba(18,145,90,0.10);border:1px solid rgba(18,145,90,0.3)">▲ 強化</span>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 18px;display:grid;grid-template-columns:1fr 84px;gap:14px;align-items:start;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div>
+        <div style="font-size:13px;font-weight:600;line-height:1.55">Cloud CAPEX 未見頂，但增速將自然放緩</div>
+        <div style="font-size:11.5px;color:#5E6980;line-height:1.6;margin-top:5px">本週：一家雲廠上調全年指引，措辭由「加速」轉為「持續」。方向不變。</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-top:6px">THESIS 更新：否</div>
+      </div>
+      <span style="justify-self:end;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;padding:3px 8px;border-radius:3px;color:#0E7A4B;background:rgba(18,145,90,0.10);border:1px solid rgba(18,145,90,0.3)">● 延續</span>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 18px;display:grid;grid-template-columns:1fr 84px;gap:14px;align-items:start;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div>
+        <div style="font-size:13px;font-weight:600;line-height:1.55">光通訊的換代紅利可延續至 2027 上半年</div>
+        <div style="font-size:11.5px;color:#5E6980;line-height:1.6;margin-top:5px">本週：1.6T 拉貨提前，但二線廠開始擴產——供給反應比預期快，紅利期可能縮短。</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#9A6A0F;margin-top:6px">THESIS 更新：是 — 紅利期下修一季，理由：供給端新事實</div>
+      </div>
+      <span style="justify-self:end;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;padding:3px 8px;border-radius:3px;color:#9A6A0F;background:rgba(176,124,21,0.10);border:1px solid rgba(176,124,21,0.3)">▼ 削弱</span>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 18px;display:grid;grid-template-columns:1fr 84px;gap:14px;align-items:start;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div>
+        <div style="font-size:13px;font-weight:600;line-height:1.55">AI 應用層將在 2026 下半年出現第一批可持續獲利公司</div>
+        <div style="font-size:11.5px;color:#5E6980;line-height:1.6;margin-top:5px">本週：無新財報證據。維持觀察，不因股價波動改變判斷。</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-top:6px">THESIS 更新：否 — 等 Q3 財報</div>
+      </div>
+      <span style="justify-self:end;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;padding:3px 8px;border-radius:3px;color:#5E6980;background:rgba(138,147,164,0.10);border:1px solid rgba(138,147,164,0.3)">◌ 待驗證</span>
+    </div>
+  </div>
+
+  <div style="margin-top:auto;background:#FCF3F3;border:1px solid #F1D5D6;border-radius:8px;padding:16px 20px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#C0343C;margin-bottom:8px">THESIS 變更規則 · 不可協商</div>
+    <div style="font-size:12px;color:#2B3446;line-height:1.8">
+      1. Thesis 只能因<b>新事實</b>或<b>明確反證</b>改變，每次變更必須註明觸發證據。<br>
+      2. 單週股價波動只能影響「估值狀態」，<b>不能直接改變基本面 thesis</b>。<br>
+      3. 「推翻」需要至少兩個獨立來源的反證；單一數據點最多標記「削弱」。
+    </div>
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>03 / 10</span></div>
+</section>
+
+<!-- ============ PAGE 04 · 本週重大事件 ============ -->
+<section data-screen-label="P04 重大事件" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto;break-after:page">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E4E7EC;padding-bottom:10px;margin-bottom:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4;text-transform:uppercase"><div>AI VALUE CHAIN WEEKLY · 2026-W28</div><div>04 / 10</div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:6px">SECTION 04 · EVENTS</div>
+  <h2 style="font-size:30px;font-weight:600;margin:0 0 16px;font-family:'Noto Serif TC',serif">本週重大事件</h2>
+  <span style="display:{{ labelDisplay }};font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;background:rgba(47,95,224,0.06);border:1px dashed rgba(47,95,224,0.4);padding:1px 5px;border-radius:2px;margin-bottom:8px">events.{company|chain|macro|geopolitics}[] — {date, headline, why_it_matters, impact}</span>
+
+  <div style="display:flex;flex-direction:column;gap:16px;flex:1">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#2F5FE0">01 · 公司與財報</div><div style="flex:1;height:1px;background:#E4E7EC"></div></div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:start;background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 14px;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A93A4;padding-top:2px">07-02</div><div><div style="font-size:12.5px;font-weight:600;line-height:1.5">大型雲廠上調全年 CAPEX 指引至新高</div><div style="font-size:11px;color:#5E6980;line-height:1.55;margin-top:3px">重要性：需求能見度延伸至 2027；注意措辭由「加速」轉為「持續」。</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#0E7A4B;background:rgba(18,145,90,0.10);border:1px solid rgba(18,145,90,0.3)">利多供給鏈</span></div>
+        <div style="display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:start;background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 14px;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A93A4;padding-top:2px">07-03</div><div><div style="font-size:12.5px;font-weight:600;line-height:1.5">記憶體大廠財報：HBM 全年產能售罄</div><div style="font-size:11px;color:#5E6980;line-height:1.55;margin-top:3px">重要性：供給端定價權延續，驗證「瓶頸在供給」thesis。</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#0E7A4B;background:rgba(18,145,90,0.10);border:1px solid rgba(18,145,90,0.3)">利多上游</span></div>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#2F5FE0">02 · 產業鏈</div><div style="flex:1;height:1px;background:#E4E7EC"></div></div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:start;background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 14px;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A93A4;padding-top:2px">07-01</div><div><div style="font-size:12.5px;font-weight:600;line-height:1.5">1.6T 光模組拉貨時程提前一季</div><div style="font-size:11px;color:#5E6980;line-height:1.55;margin-top:3px">重要性：短期出貨上修，但二線擴產同步啟動——供給反應快於上一輪。</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#9A6A0F;background:rgba(176,124,21,0.10);border:1px solid rgba(176,124,21,0.3)">中性偏多</span></div>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#2F5FE0">03 · 宏觀 / 利率 / 資金面</div><div style="flex:1;height:1px;background:#E4E7EC"></div></div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:start;background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 14px;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A93A4;padding-top:2px">07-02</div><div><div style="font-size:12.5px;font-weight:600;line-height:1.5">FOMC 紀要：年內降息路徑維持兩次</div><div style="font-size:11px;color:#5E6980;line-height:1.55;margin-top:3px">重要性：資金面中性偏多；長久期成長股估值支撐未變。</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#5E6980;background:rgba(138,147,164,0.10);border:1px solid rgba(138,147,164,0.3)">中性</span></div>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#2F5FE0">04 · 地緣政治 / 出口管制</div><div style="flex:1;height:1px;background:#E4E7EC"></div></div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:start;background:#FFFFFF;border:1px solid #E4E7EC;border-radius:6px;padding:11px 14px;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A93A4;padding-top:2px">06-30</div><div><div style="font-size:12.5px;font-weight:600;line-height:1.5">出口管制新增條款進入評估期</div><div style="font-size:11px;color:#5E6980;line-height:1.55;margin-top:3px">重要性：尾部風險，目前未被市場定價；影響範圍待條款細節。</div></div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#C0343C;background:rgba(206,59,68,0.10);border:1px solid rgba(206,59,68,0.3)">尾部風險</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:auto">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#2F5FE0">05 · 市場隱含機率 vs 我們的評估</div><div style="flex:1;height:1px;background:#E4E7EC"></div></div>
+      <div style="border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;font-size:11.5px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+        <div style="display:grid;grid-template-columns:1fr 120px 1fr;background:#EEF1F5;border-bottom:1px solid #E4E7EC;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4"><div style="padding:9px 14px">事件</div><div style="padding:9px 14px">市場隱含</div><div style="padding:9px 14px">我們的評估</div></div>
+        <div style="display:grid;grid-template-columns:1fr 120px 1fr;border-bottom:1px solid #EDEFF2"><div style="padding:11px 14px">9 月降息一碼</div><div style="padding:11px 14px;font-family:'IBM Plex Mono',monospace;color:#2F5FE0">78%</div><div style="padding:11px 14px;color:#5E6980">合理，已充分定價</div></div>
+        <div style="display:grid;grid-template-columns:1fr 120px 1fr;border-bottom:1px solid #EDEFF2"><div style="padding:11px 14px">主要 GPU 廠下季 beat &amp; raise</div><div style="padding:11px 14px;font-family:'IBM Plex Mono',monospace;color:#2F5FE0">~90%</div><div style="padding:11px 14px;color:#9A6A0F">偏自滿，執行風險被低估</div></div>
+        <div style="display:grid;grid-template-columns:1fr 120px 1fr"><div style="padding:11px 14px">2027 Cloud CAPEX 年減</div><div style="padding:11px 14px;font-family:'IBM Plex Mono',monospace;color:#2F5FE0">&lt;15%</div><div style="padding:11px 14px;color:#5E6980">合理——瓶頸在供給，砍單誘因低</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>04 / 10</span></div>
+</section>
+
+<!-- ============ PAGE 05 · BLUE TEAM vs RED TEAM ============ -->
+<section data-screen-label="P05 Blue vs Red" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto;break-after:page">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E4E7EC;padding-bottom:10px;margin-bottom:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4;text-transform:uppercase"><div>AI VALUE CHAIN WEEKLY · 2026-W28</div><div>05 / 10</div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:6px">SECTION 05 · ADVERSARIAL REVIEW</div>
+  <h2 style="font-size:30px;font-weight:600;margin:0 0 4px;font-family:'Noto Serif TC',serif">Blue Team vs Red Team</h2>
+  <div style="font-size:12px;color:#5E6980;margin-bottom:18px">每一條論點必須附證據等級（●●● 硬數據 / ●●○ 訊號 / ●○○ 敘事）。禁止只列自己相信的一邊。</div>
+  <span style="display:{{ labelDisplay }};font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;background:rgba(47,95,224,0.06);border:1px dashed rgba(47,95,224,0.4);padding:1px 5px;border-radius:2px;margin-bottom:8px">debate.blue[] / debate.red[] — {claim, evidence, strength 1–3}</span>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1">
+    <div style="background:#F2F5FD;border:1px solid #D3E0FA;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#2F5FE0;font-weight:600">BLUE TEAM · 多頭</div><div style="width:10px;height:10px;border-radius:50%;background:#2F5FE0"></div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 16px"><div style="font-size:13px;font-weight:600;line-height:1.55">Token 用量指數級成長，且開始被收費</div><div style="font-size:11px;color:#5E6980;line-height:1.6;margin-top:5px">推理需求非展示性需求；API 收入與用量同步成長。</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#2F5FE0;margin-top:8px">證據 ●●●</div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 16px"><div style="font-size:13px;font-weight:600;line-height:1.55">CAPEX 由現金流最強的公司支付</div><div style="font-size:11px;color:#5E6980;line-height:1.6;margin-top:5px">與 2000 年電信泡沫不同：本輪資本支出來自經營現金流，不是垃圾債。</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#2F5FE0;margin-top:8px">證據 ●●●</div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 16px"><div style="font-size:13px;font-weight:600;line-height:1.55">瓶頸在供給端，不是需求端</div><div style="font-size:11px;color:#5E6980;line-height:1.6;margin-top:5px">電力、HBM、先進封裝全數排隊中——需求崩塌前，供給先撞牆。</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#2F5FE0;margin-top:8px">證據 ●●○</div></div>
+    </div>
+    <div style="background:#FCF3F3;border:1px solid #F1D5D6;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#C0343C;font-weight:600">RED TEAM · 空頭</div><div style="width:10px;height:10px;border-radius:50%;background:#CE3B44"></div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 16px"><div style="font-size:13px;font-weight:600;line-height:1.55">推理成本下降速度快於收入成長</div><div style="font-size:11px;color:#5E6980;line-height:1.6;margin-top:5px">單 token 價格一年內下降一個數量級——用量成長可能追不上通縮。</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#C0343C;margin-top:8px">證據 ●●○</div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 16px"><div style="font-size:13px;font-weight:600;line-height:1.55">CAPEX / 營收比逼近歷史警戒區</div><div style="font-size:11px;color:#5E6980;line-height:1.6;margin-top:5px">折舊將在 2027 開始壓縮雲廠利潤率；投資人尚未定價這件事。</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#C0343C;margin-top:8px">證據 ●●●</div></div>
+      <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 16px"><div style="font-size:13px;font-weight:600;line-height:1.55">應用層毛利被基礎模型商品化壓縮</div><div style="font-size:11px;color:#5E6980;line-height:1.6;margin-top:5px">模型能力趨同 → 應用層沒有護城河 → 下游永遠賺不到錢。</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#C0343C;margin-top:8px">證據 ●○○</div></div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:16px 20px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#8A93A4">當前傾斜 · NET TILT</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#2F5FE0">偏多 60 / 40，但傾斜幅度較上週收窄</div></div>
+    <div style="height:10px;border-radius:5px;background:#EEF1F5;position:relative;overflow:hidden">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:60%;background:linear-gradient(90deg,#1E3FAE,#2F5FE0)"></div>
+      <div style="position:absolute;right:0;top:0;bottom:0;width:40%;background:linear-gradient(90deg,rgba(206,59,68,0.4),#CE3B44)"></div>
+      <div style="position:absolute;left:60%;top:-2px;bottom:-2px;width:2px;background:#111827"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:#8A93A4;margin-top:6px"><span>BLUE 60</span><span>RED 40</span></div>
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>05 / 10</span></div>
+</section>
+
+<!-- ============ PAGE 06 · VALUATION CHECK ============ -->
+<section data-screen-label="P06 Valuation Check" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto;break-after:page">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E4E7EC;padding-bottom:10px;margin-bottom:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4;text-transform:uppercase"><div>AI VALUE CHAIN WEEKLY · 2026-W28</div><div>06 / 10</div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:6px">SECTION 06 · VALUATION CHECK</div>
+  <h2 style="font-size:30px;font-weight:600;margin:0 0 16px;font-family:'Noto Serif TC',serif">估值 vs 基本面風險地圖</h2>
+  <span style="display:{{ labelDisplay }};font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;background:rgba(47,95,224,0.06);border:1px dashed rgba(47,95,224,0.4);padding:1px 5px;border-radius:2px;margin-bottom:8px">valuation.map[] — {segment, fundamental_risk 0–100, valuation_level 0–100}</span>
+
+  <div style="display:flex;gap:0;margin-bottom:20px">
+    <div style="width:26px;display:flex;align-items:center;justify-content:center"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:#8A93A4;writing-mode:vertical-rl;transform:rotate(180deg)">估值水位 →</div></div>
+    <div style="flex:1">
+      <div style="position:relative;height:400px;border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+        <div style="position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr">
+          <div style="background:rgba(176,124,21,0.05);border-right:1px dashed #E0E4EA;border-bottom:1px dashed #E0E4EA;padding:10px 12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#9A6A0F">優質但貴</span></div>
+          <div style="background:rgba(206,59,68,0.06);border-bottom:1px dashed #E0E4EA;padding:10px 12px;text-align:right"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#C0343C">危險區</span></div>
+          <div style="background:rgba(18,145,90,0.05);border-right:1px dashed #E0E4EA;padding:10px 12px;display:flex;align-items:flex-end"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#0E7A4B">安全邊際區</span></div>
+          <div style="background:rgba(138,147,164,0.05);padding:10px 12px;display:flex;align-items:flex-end;justify-content:flex-end"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4">價值陷阱?</span></div>
+        </div>
+        <div style="position:absolute;left:18%;top:22%;display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#C4652A;border:2px solid #FFFFFF;box-shadow:0 0 0 1px #C4652A"></div><span style="font-size:10.5px;font-weight:600;color:#2B3446">GPU/ASIC</span></div>
+        <div style="position:absolute;left:30%;top:38%;display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#C4652A;border:2px solid #FFFFFF;box-shadow:0 0 0 1px #C4652A"></div><span style="font-size:10.5px;font-weight:600;color:#2B3446">HBM/DRAM</span></div>
+        <div style="position:absolute;left:55%;top:12%;display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#CE3B44;border:2px solid #FFFFFF;box-shadow:0 0 0 1px #CE3B44"></div><span style="font-size:10.5px;font-weight:600;color:#2B3446">光通訊</span></div>
+        <div style="position:absolute;left:14%;top:56%;display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#12915A;border:2px solid #FFFFFF;box-shadow:0 0 0 1px #12915A"></div><span style="font-size:10.5px;font-weight:600;color:#2B3446">電力/散熱</span></div>
+        <div style="position:absolute;left:38%;top:62%;display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#8A93A4;border:2px solid #FFFFFF;box-shadow:0 0 0 1px #8A93A4"></div><span style="font-size:10.5px;font-weight:600;color:#2B3446">Cloud CAPEX</span></div>
+        <div style="position:absolute;left:72%;top:28%;display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:50%;background:#CE3B44;border:2px solid #FFFFFF;box-shadow:0 0 0 1px #CE3B44"></div><span style="font-size:10.5px;font-weight:600;color:#2B3446">AI 應用</span></div>
+      </div>
+      <div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:#8A93A4;margin-top:8px">基本面風險 →</div>
+    </div>
+  </div>
+
+  <div style="border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;font-size:11.5px;margin-bottom:16px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <div style="display:grid;grid-template-columns:130px 1fr 1fr 96px;background:#EEF1F5;border-bottom:1px solid #E4E7EC;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4"><div style="padding:9px 14px">板塊</div><div style="padding:9px 14px">基本面是否支持估值</div><div style="padding:9px 14px">風險報酬是否變差</div><div style="padding:9px 14px">結論</div></div>
+    <div style="display:grid;grid-template-columns:130px 1fr 1fr 96px;border-bottom:1px solid #EDEFF2;align-items:center"><div style="padding:11px 14px;font-weight:600">電力/散熱</div><div style="padding:11px 14px;color:#5E6980">是——訂單/獲利雙升</div><div style="padding:11px 14px;color:#5E6980">否，仍具安全邊際</div><div style="padding:11px 14px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#0E7A4B;background:rgba(18,145,90,0.10);border:1px solid rgba(18,145,90,0.3)">可持有</span></div></div>
+    <div style="display:grid;grid-template-columns:130px 1fr 1fr 96px;border-bottom:1px solid #EDEFF2;align-items:center"><div style="padding:11px 14px;font-weight:600">GPU / ASIC</div><div style="padding:11px 14px;color:#5E6980">大致是，但需完美執行</div><div style="padding:11px 14px;color:#9A6A0F">是——上行/下行不對稱惡化</div><div style="padding:11px 14px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#9A6A0F;background:rgba(176,124,21,0.10);border:1px solid rgba(176,124,21,0.3)">不加碼</span></div></div>
+    <div style="display:grid;grid-template-columns:130px 1fr 1fr 96px;align-items:center"><div style="padding:11px 14px;font-weight:600">光通訊</div><div style="padding:11px 14px;color:#9A6A0F">未來 12 月是，之後存疑</div><div style="padding:11px 14px;color:#C0343C">是——明顯變差</div><div style="padding:11px 14px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#C0343C;background:rgba(206,59,68,0.10);border:1px solid rgba(206,59,68,0.3)">警戒</span></div></div>
+  </div>
+
+  <div style="margin-top:auto;background:#F2F5FD;border:1px solid #D3E0FA;border-radius:8px;padding:14px 20px;font-size:12px;color:#2B3446;line-height:1.8">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#2F5FE0;display:block;margin-bottom:6px">估值紀律</span>
+    單週股價波動只能改變本頁的「估值狀態」讀數；它<b>不構成基本面 thesis 的證據</b>。價格是投票機，本報告只對稱重機負責。
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>06 / 10</span></div>
+</section>
+
+<!-- ============ PAGE 07 · 需求真實性檢查 ============ -->
+<section data-screen-label="P07 需求真實性" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto;break-after:page">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E4E7EC;padding-bottom:10px;margin-bottom:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4;text-transform:uppercase"><div>AI VALUE CHAIN WEEKLY · 2026-W28</div><div>07 / 10</div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:6px">SECTION 07 · DEMAND REALITY CHECK</div>
+  <h2 style="font-size:30px;font-weight:600;margin:0 0 16px;font-family:'Noto Serif TC',serif">需求真實性檢查</h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:16px 18px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#0E7A4B;margin-bottom:10px">● 誰正在賺錢</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.55">
+        <div style="display:flex;justify-content:space-between;gap:10px"><span>晶圓代工 / 先進封裝</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#0E7A4B">毛利率 ↑</span></div>
+        <div style="display:flex;justify-content:space-between;gap:10px"><span>HBM / 記憶體</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#0E7A4B">定價權 ↑</span></div>
+        <div style="display:flex;justify-content:space-between;gap:10px"><span>電力設備 / 散熱</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#0E7A4B">積壓訂單 2yr+</span></div>
+        <div style="display:flex;justify-content:space-between;gap:10px"><span>GPU 平台商</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#0E7A4B">FCF 創高</span></div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:16px 18px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#C0343C;margin-bottom:10px">● 誰仍在燒錢</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.55">
+        <div style="display:flex;justify-content:space-between;gap:10px"><span>基礎模型實驗室</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#C0343C">訓練成本 &gt; 收入</span></div>
+        <div style="display:flex;justify-content:space-between;gap:10px"><span>AI SaaS 純訂閱</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#C0343C">推理成本吃毛利</span></div>
+        <div style="display:flex;justify-content:space-between;gap:10px"><span>GPU 雲二線（neocloud）</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#9A6A0F">槓桿擴張中</span></div>
+        <div style="display:flex;justify-content:space-between;gap:10px"><span>消費級 AI 硬體</span><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#C0343C">尚無爆品</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4">CAPEX 可持續性 · 三個檢查點</div>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#0E7A4B;background:rgba(18,145,90,0.10);border:1px solid rgba(18,145,90,0.3)">目前可持續</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;font-size:11.5px">
+      <div style="border:1px solid #E4E7EC;border-radius:6px;padding:12px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-bottom:6px">CAPEX / OCF</div><div style="font-weight:600;color:#9A6A0F">~55%，升至歷史高檔</div></div>
+      <div style="border:1px solid #E4E7EC;border-radius:6px;padding:12px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-bottom:6px">融資結構</div><div style="font-weight:600;color:#0E7A4B">經營現金流為主，債務占比低</div></div>
+      <div style="border:1px solid #E4E7EC;border-radius:6px;padding:12px"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;margin-bottom:6px">Guidance 措辭</div><div style="font-weight:600;color:#5E6980">「持續投資」— 未見退坡訊號</div></div>
+    </div>
+    <div style="margin-top:12px;height:150px;background:repeating-linear-gradient(45deg,#FFFFFF,#FFFFFF 8px,#F1F3F6 8px,#F1F3F6 16px);border:1px dashed #C4CBD6;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8A93A4;text-align:center;line-height:2">[ asset slot: capex-trend.png ]<br>四大雲 CAPEX 季度趨勢 + YoY 增速雙軸圖</div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:16px 18px;flex:1;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4;margin-bottom:10px">AI 應用是否真的變現 · 單位經濟記分板</div>
+    <div style="border:1px solid #E4E7EC;border-radius:6px;overflow:hidden;font-size:11.5px">
+      <div style="display:grid;grid-template-columns:1fr 130px 130px 96px;background:#EEF1F5;border-bottom:1px solid #E4E7EC;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;color:#8A93A4"><div style="padding:8px 12px">層級</div><div style="padding:8px 12px">收入趨勢</div><div style="padding:8px 12px">單位毛利</div><div style="padding:8px 12px">判定</div></div>
+      <div style="display:grid;grid-template-columns:1fr 130px 130px 96px;border-bottom:1px solid #EDEFF2;align-items:center"><div style="padding:10px 12px">API / 模型即服務</div><div style="padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#0E7A4B">高速成長</div><div style="padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#9A6A0F">改善中</div><div style="padding:10px 12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#0E7A4B;background:rgba(18,145,90,0.10);border:1px solid rgba(18,145,90,0.3)">真變現</span></div></div>
+      <div style="display:grid;grid-template-columns:1fr 130px 130px 96px;border-bottom:1px solid #EDEFF2;align-items:center"><div style="padding:10px 12px">Coding / Agent 工具</div><div style="padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#0E7A4B">高速成長</div><div style="padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#9A6A0F">分化大</div><div style="padding:10px 12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#9A6A0F;background:rgba(176,124,21,0.10);border:1px solid rgba(176,124,21,0.3)">部分</span></div></div>
+      <div style="display:grid;grid-template-columns:1fr 130px 130px 96px;align-items:center"><div style="padding:10px 12px">消費級 AI 訂閱</div><div style="padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#5E6980">成長放緩</div><div style="padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#C0343C">仍為負</div><div style="padding:10px 12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#C0343C;background:rgba(206,59,68,0.10);border:1px solid rgba(206,59,68,0.3)">未證明</span></div></div>
+    </div>
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>07 / 10</span></div>
+</section>
+
+<!-- ============ PAGE 08 · WATCHLIST 四象限 ============ -->
+<section data-screen-label="P08 Watchlist 四象限" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto;break-after:page">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E4E7EC;padding-bottom:10px;margin-bottom:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4;text-transform:uppercase"><div>AI VALUE CHAIN WEEKLY · 2026-W28</div><div>08 / 10</div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:6px">SECTION 08 · WATCHLIST</div>
+  <h2 style="font-size:30px;font-weight:600;margin:0 0 4px;font-family:'Noto Serif TC',serif">Watchlist 四象限</h2>
+  <div style="font-size:12px;color:#5E6980;margin-bottom:16px">縱軸：長期信念（thesis 強度）。橫軸：當前價格吸引力。標的進出象限必須在 §3 留下紀錄。</div>
+  <span style="display:{{ labelDisplay }};font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;background:rgba(47,95,224,0.06);border:1px dashed rgba(47,95,224,0.4);padding:1px 5px;border-radius:2px;margin-bottom:8px">watchlist.{core|pullback|mispriced|overheated}[] — {name, note}</span>
+
+  <div style="display:flex;gap:0;flex:1">
+    <div style="width:26px;display:flex;align-items:center;justify-content:center"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:#8A93A4;writing-mode:vertical-rl;transform:rotate(180deg)">長期信念 →</div></div>
+    <div style="flex:1;display:flex;flex-direction:column">
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px">
+        <div style="background:#F2F5FD;border:1px solid #D3E0FA;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:700;color:#2F5FE0">等待回調</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.1em;color:#8A93A4">高信念 · 價格偏貴</div></div>
+          <div style="display:flex;flex-direction:column;gap:7px;font-size:11.5px;line-height:1.5">
+            <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#111827">NVDA</span><span style="color:#5E6980"> — 平台地位無虞，等待估值回到區間下緣</span></div>
+            <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#111827">VRT</span><span style="color:#5E6980"> — 訂單能見度高，但已反映一年成長</span></div>
+          </div>
+        </div>
+        <div style="background:#F1F8F4;border:1px solid #CFE7DA;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:700;color:#0E7A4B">核心長期</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.1em;color:#8A93A4">高信念 · 價格可接受</div></div>
+          <div style="display:flex;flex-direction:column;gap:7px;font-size:11.5px;line-height:1.5">
+            <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#111827">TSM</span><span style="color:#5E6980"> — 全產業鏈的必經之路，估值仍合理</span></div>
+            <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#111827">MSFT</span><span style="color:#5E6980"> — CAPEX 有現金流支撐，企業分發護城河</span></div>
+          </div>
+        </div>
+        <div style="background:#FCF3F3;border:1px solid #F1D5D6;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:700;color:#C0343C">過熱警戒</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.1em;color:#8A93A4">低信念 · 價格昂貴</div></div>
+          <div style="display:flex;flex-direction:column;gap:7px;font-size:11.5px;line-height:1.5">
+            <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#111827">光模組二線</span><span style="color:#5E6980"> — 擴產潮啟動，週期高點特徵浮現</span></div>
+            <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#111827">AI SaaS 故事股</span><span style="color:#5E6980"> — 估值以敘事計價，無單位經濟支撐</span></div>
+          </div>
+        </div>
+        <div style="background:#FBF6EA;border:1px solid #EBDCBB;border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:700;color:#9A6A0F">預期差</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.1em;color:#8A93A4">市場低估 · 價格便宜</div></div>
+          <div style="display:flex;flex-direction:column;gap:7px;font-size:11.5px;line-height:1.5">
+            <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#111827">MU</span><span style="color:#5E6980"> — 市場仍以舊記憶體週期定價 HBM 結構性轉變</span></div>
+            <div><span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#111827">電網設備</span><span style="color:#5E6980"> — AI 電力缺口的二階受益者，尚未擁擠</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:#8A93A4;margin-top:10px">當前價格吸引力 →</div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:14px 20px;font-size:12px;color:#2B3446;line-height:1.8;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#8A93A4;display:block;margin-bottom:6px">本週象限異動</span>
+    <b>VRT</b>：核心長期 → 等待回調（估值觸及區間上緣，thesis 不變）。無新增、無剔除。
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>08 / 10</span></div>
+</section>
+
+<!-- ============ PAGE 09 · 最終判斷 ============ -->
+<section data-screen-label="P09 最終判斷" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto;break-after:page">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E4E7EC;padding-bottom:10px;margin-bottom:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4;text-transform:uppercase"><div>AI VALUE CHAIN WEEKLY · 2026-W28</div><div>09 / 10</div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:6px">SECTION 09 · FINAL JUDGMENT</div>
+  <h2 style="font-size:30px;font-weight:600;margin:0 0 18px;font-family:'Noto Serif TC',serif">最終判斷</h2>
+  <span style="display:{{ labelDisplay }};font-family:'IBM Plex Mono',monospace;font-size:8px;color:#2F5FE0;background:rgba(47,95,224,0.06);border:1px dashed rgba(47,95,224,0.4);padding:1px 5px;border-radius:2px;margin-bottom:8px">final.{believe, doubt, market_mispricing, if_wrong} + final.signals[]</span>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:18px 20px;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#0E7A4B;margin-bottom:10px">我現在相信什麼</div><div style="font-size:12.5px;color:#2B3446;line-height:1.75">算力需求是真實的、由付費行為驅動的；本輪週期的約束在供給端（電力、HBM、先進封裝），而非需求端。基礎設施層的獲利品質是本輪最被低估的事實。</div></div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:18px 20px;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#9A6A0F;margin-bottom:10px">我懷疑什麼</div><div style="font-size:12.5px;color:#2B3446;line-height:1.75">懷疑光通訊與部分中游環節的「永續高成長」定價；懷疑應用層在模型商品化下能守住毛利；懷疑市場對完美執行的預設。</div></div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:18px 20px;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#2F5FE0;margin-bottom:10px">市場可能錯估哪裡</div><div style="font-size:12.5px;color:#2B3446;line-height:1.75">把「CAPEX 增速放緩」誤讀為「需求見頂」；同時低估折舊對 2027 年雲廠利潤率的侵蝕——兩個方向的錯估並存。</div></div>
+    <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:18px 20px;box-shadow:0 1px 2px rgba(16,23,37,0.04)"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#C0343C;margin-bottom:10px">如果我錯了，最可能錯在哪</div><div style="font-size:12.5px;color:#2B3446;line-height:1.75">推理成本通縮快於用量成長，導致算力收入不及預期——這會同時擊穿上游與基建的訂單假設。這是本 thesis 的單點故障。</div></div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-left:3px solid #2F5FE0;border-radius:8px;padding:18px 20px;flex:1;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:14px">下週最值得觀察的信號 · WATCH NEXT WEEK</div>
+    <div style="display:flex;flex-direction:column;gap:11px">
+      <div style="display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:baseline"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#2F5FE0;font-weight:600">01</div><div style="font-size:12.5px;line-height:1.6;color:#2B3446">兩家雲廠財報中 CAPEX guidance 的<b>措辭變化</b>（加速 / 持續 / 審慎）</div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#2F5FE0;background:rgba(47,95,224,0.08);border:1px solid rgba(47,95,224,0.3)">§7 直接輸入</span></div>
+      <div style="display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:baseline"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#2F5FE0;font-weight:600">02</div><div style="font-size:12.5px;line-height:1.6;color:#2B3446">HBM4 合約價與交期是否鬆動（任何鬆動 = 上游 thesis 削弱訊號）</div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#2F5FE0;background:rgba(47,95,224,0.08);border:1px solid rgba(47,95,224,0.3)">§3 追蹤</span></div>
+      <div style="display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:baseline"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#2F5FE0;font-weight:600">03</div><div style="font-size:12.5px;line-height:1.6;color:#2B3446">1.6T 光模組二線廠的擴產資本支出公告（擴產潮 = 週期高點訊號）</div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#9A6A0F;background:rgba(176,124,21,0.10);border:1px solid rgba(176,124,21,0.3)">警戒觸發器</span></div>
+      <div style="display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:baseline"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#2F5FE0;font-weight:600">04</div><div style="font-size:12.5px;line-height:1.6;color:#2B3446">資料中心 PPA 簽約電價走勢（持續上行 = 電力瓶頸 thesis 強化）</div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#2F5FE0;background:rgba(47,95,224,0.08);border:1px solid rgba(47,95,224,0.3)">§3 追蹤</span></div>
+      <div style="display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:baseline"><div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#2F5FE0;font-weight:600">05</div><div style="font-size:12.5px;line-height:1.6;color:#2B3446">主要 API 平台的 token 單價 vs 用量成長率交叉（收入曲線的領先指標）</div><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;color:#C0343C;background:rgba(206,59,68,0.10);border:1px solid rgba(206,59,68,0.3)">單點故障監測</span></div>
+    </div>
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>09 / 10</span></div>
+</section>
+
+<!-- ============ PAGE 10 · SOURCES / DISCLAIMER ============ -->
+<section data-screen-label="P10 Sources Disclaimer" style="width:794px;height:1123px;background:#FBFCFD;color:#111827;font-family:'IBM Plex Sans','Noto Sans TC',sans-serif;padding:44px 48px 60px;box-sizing:border-box;position:relative;display:flex;flex-direction:column;overflow:hidden;flex:0 0 auto">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #E4E7EC;padding-bottom:10px;margin-bottom:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;color:#8A93A4;text-transform:uppercase"><div>AI VALUE CHAIN WEEKLY · 2026-W28</div><div>10 / 10</div></div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:#2F5FE0;margin-bottom:6px">SECTION 10 · SOURCES &amp; DISCLAIMER</div>
+  <h2 style="font-size:30px;font-weight:600;margin:0 0 18px;font-family:'Noto Serif TC',serif">資料來源與聲明</h2>
+
+  <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4;margin-bottom:12px">SOURCES · 依證據等級排列</div>
+    <div style="display:flex;flex-direction:column;gap:9px;font-size:12px;line-height:1.6">
+      <div style="display:grid;grid-template-columns:110px 1fr;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#0E7A4B">一手 / 硬數據</span><span style="color:#2B3446">公司財報與 10-Q/10-K、財報電話會逐字稿、CAPEX guidance 原文</span></div>
+      <div style="display:grid;grid-template-columns:110px 1fr;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#2F5FE0">產業數據</span><span style="color:#2B3446">記憶體合約價（TrendForce 等）、光模組出貨追蹤、PPA 電價資料</span></div>
+      <div style="display:grid;grid-template-columns:110px 1fr;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#9A6A0F">二手 / 訊號</span><span style="color:#2B3446">供應鏈 checks、賣方報告（僅作交叉驗證，不作為 thesis 依據）</span></div>
+      <div style="display:grid;grid-template-columns:110px 1fr;gap:12px"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8A93A4">市場隱含</span><span style="color:#2B3446">利率期貨、選擇權隱含波動、事件合約機率</span></div>
+    </div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #E4E7EC;border-radius:8px;padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 2px rgba(16,23,37,0.04)">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#8A93A4;margin-bottom:12px">METHODOLOGY · 本報告的固定紀律</div>
+    <div style="font-size:12px;color:#2B3446;line-height:1.9">
+      · 每週固定 schema 產出，判斷可回溯、可被打臉（§3 永久留檔）。<br>
+      · Thesis 變更僅接受新事實與明確反證；價格波動不是證據。<br>
+      · 所有多頭論點必經 Red Team 對抗；證據等級標示於每一條論點。<br>
+      · 本報告為長期追蹤工具，不提供短線交易訊號。
+    </div>
+  </div>
+
+  <div style="background:#FCF3F3;border:1px solid #F1D5D6;border-radius:8px;padding:18px 20px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#C0343C;margin-bottom:10px">DISCLAIMER</div>
+    <div style="font-size:11.5px;color:#5E6980;line-height:1.9">本報告為可分享之投資研究筆記，僅供資訊與教育用途，不構成任何證券之買賣建議或投資邀約。文中提及之公司與代號僅為研究框架示例。所有判斷可能出錯；讀者應自行進行盡職調查並為自身決策負責。過往表現不代表未來結果。</div>
+  </div>
+
+  <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#8A93A4;line-height:2">AI VALUE CHAIN WEEKLY<br>SCHEMA v1.0 · GENERATED 2026-07-06</div>
+    <div style="width:34px;height:34px;border:1.5px solid #2F5FE0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:#2F5FE0">AV</div>
+  </div>
+  <div style="position:absolute;left:48px;right:48px;bottom:22px;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.1em;color:#AEB6C4"><span>SHAREABLE RESEARCH · NOT INVESTMENT ADVICE</span><span>10 / 10</span></div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showSlotLabels&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Template&quot;,&quot;description&quot;:&quot;顯示 schema slot 標籤（agent 填資料時對照用；輸出 PDF 前關閉）&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      labelDisplay: (this.props.showSlotLabels ?? false) ? 'inline-flex' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

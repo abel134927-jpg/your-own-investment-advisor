@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Industry Chain Weekly Report Data",
+  "type": "object",
+  "required": [
+    "issue",
+    "date",
+    "verdict_one_line",
+    "dashboard",
+    "heatmap",
+    "continuity",
+    "debate",
+    "valuation",
+    "demand",
+    "watchlist",
+    "final",
+    "sources"
+  ],
+  "properties": {
+    "issue": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "verdict_one_line": {
+      "type": "string"
+    },
+    "dashboard": {
+      "type": "object"
+    },
+    "heatmap": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "position",
+          "segment",
+          "heat_level",
+          "signal",
+          "tickers"
+        ],
+        "properties": {
+          "position": {
+            "type": "string"
+          },
+          "segment": {
+            "type": "string"
+          },
+          "heat_level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "signal": {
+            "type": "string"
+          },
+          "tickers": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "continuity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "prior_view",
+          "status",
+          "evidence",
+          "thesis_updated"
+        ],
+        "properties": {
+          "prior_view": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "● 延續",
+              "▲ 強化",
+              "▼ 削弱",
+              "✕ 推翻",
+              "◌ 待驗證"
+            ]
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "thesis_updated": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "array"
+    },
+    "debate": {
+      "type": "object"
+    },
+    "valuation": {
+      "type": "object"
+    },
+    "demand": {
+      "type": "object"
+    },
+    "watchlist": {
+      "type": "object"
+    },
+    "final": {
+      "type": "object"
+    },
+    "sources": {
+      "type": "object"
+    }
+  }
+}

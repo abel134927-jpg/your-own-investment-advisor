@@ -1,0 +1,93 @@
+{
+  "generated_at": "2026-07-16T11:18:34.031173+00:00",
+  "source_of_truth": "..\\..\\examples\\portfolio-demo\\ledger-staging\\transactions.csv",
+  "base_currency": "USD",
+  "reference_currency": "TWD",
+  "status": "generated",
+  "phase": "v1-ledger-skeleton",
+  "processed_transactions": 8,
+  "holdings": [
+    {
+      "ticker": "AVGO",
+      "market": "US",
+      "asset_type": "Stock",
+      "sleeve": "AI Strategy",
+      "quantity": 10.0,
+      "avg_cost": 250.0,
+      "cost_basis": 2500.0,
+      "currency": "USD",
+      "current_price": null,
+      "market_value": null,
+      "unrealized_pnl": null,
+      "weight": null
+    },
+    {
+      "ticker": "NVDA",
+      "market": "US",
+      "asset_type": "Stock",
+      "sleeve": "AI Strategy",
+      "quantity": 40.0,
+      "avg_cost": 155.0,
+      "cost_basis": 6200.0,
+      "currency": "USD",
+      "current_price": null,
+      "market_value": null,
+      "unrealized_pnl": null,
+      "weight": null
+    },
+    {
+      "ticker": "QQQ",
+      "market": "US",
+      "asset_type": "ETF",
+      "sleeve": "Core Long-term",
+      "quantity": 30.0,
+      "avg_cost": 480.0,
+      "cost_basis": 14400.0,
+      "currency": "USD",
+      "current_price": null,
+      "market_value": null,
+      "unrealized_pnl": null,
+      "weight": null
+    },
+    {
+      "ticker": "SMH",
+      "market": "US",
+      "asset_type": "ETF",
+      "sleeve": "AI Strategy",
+      "quantity": 25.0,
+      "avg_cost": 260.0,
+      "cost_basis": 6500.0,
+      "currency": "USD",
+      "current_price": null,
+      "market_value": null,
+      "unrealized_pnl": null,
+      "weight": null
+    },
+    {
+      "ticker": "VOO",
+      "market": "US",
+      "asset_type": "ETF",
+      "sleeve": "Core Long-term",
+      "quantity": 40.0,
+      "avg_cost": 470.0,
+      "cost_basis": 18800.0,
+      "currency": "USD",
+      "current_price": null,
+      "market_value": null,
+      "unrealized_pnl": null,
+      "weight": null
+    }
+  ],
+  "cash": [
+    {
+      "currency": "USD",
+      "amount": 51602.8
+    }
+  ],
+  "warnings": [],
+  "limitations": [
+    "No live current_price fetching in Phase 1/2.",
+    "No TWR calculation in Phase 1/2.",
+    "Simplified cost-basis logic; broker reconciliation required before production."
+  ]
+}

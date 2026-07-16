@@ -1,0 +1,9 @@
+txn_id,date,action,ticker,market,asset_type,sleeve,quantity,price,currency,fees,tax,source,confirmed_by_user,notes,reversal_of
+txn_20260710_CASH_dep001,2026-07-10,deposit,,US,Cash,Cash,,10000,USD,0,0,smoke-test,true,initial cash,
+txn_20260710_NVDA_buy001,2026-07-10,buy,NVDA,US,Stock,AI Strategy,10,100,USD,1,0,smoke-test,true,buy nvda,
+txn_20260711_NVDA_div001,2026-07-11,dividend,NVDA,US,Stock,AI Strategy,,10,USD,0,0,smoke-test,true,cash dividend,
+txn_20260711_NVDA_tax001,2026-07-11,tax_withholding,NVDA,US,Stock,AI Strategy,,3,USD,0,3,smoke-test,true,dividend withholding,
+txn_20260712_NVDA_split001,2026-07-12,split,NVDA,US,Stock,AI Strategy,2,,USD,0,0,smoke-test,true,2-for-1 split,
+txn_20260713_AMD_buy_bad,2026-07-13,buy,AMD,US,Stock,AI Strategy,1,200,USD,0,0,smoke-test,true,intentional erroneous buy,
+txn_20260713_AMD_reversal001,2026-07-13,reversal,AMD,US,Stock,AI Strategy,,,USD,0,0,smoke-test,true,reverse erroneous AMD buy,txn_20260713_AMD_buy_bad
+txn_20260714_NVDA_sell001,2026-07-14,sell,NVDA,US,Stock,AI Strategy,5,120,USD,1,0,smoke-test,true,sell after split,

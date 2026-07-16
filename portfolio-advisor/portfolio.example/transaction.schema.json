@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Portfolio Transaction",
+  "type": "object",
+  "required": [
+    "txn_id",
+    "date",
+    "action",
+    "asset_type",
+    "sleeve",
+    "currency",
+    "confirmed_by_user"
+  ],
+  "properties": {
+    "txn_id": {"type": "string", "pattern": "^txn_[0-9]{8}_[A-Za-z0-9_-]+_[A-Za-z0-9]+$"},
+    "date": {"type": "string", "format": "date"},
+    "action": {
+      "type": "string",
+      "enum": [
+        "buy",
+        "sell",
+        "deposit",
+        "withdraw",
+        "dividend",
+        "tax_withholding",
+        "fee",
+        "split",
+        "reverse_split",
+        "reversal",
+        "transfer_in",
+        "transfer_out",
+        "fx"
+      ]
+    },
+    "ticker": {"type": "string"},
+    "market": {"type": "string"},
+    "asset_type": {"type": "string", "enum": ["Stock", "ETF", "Cash", "Crypto"]},
+    "sleeve": {"type": "string", "enum": ["Core Long-term", "AI Strategy", "Cash", "Crypto Satellite"]},
+    "quantity": {"type": "number"},
+    "price": {"type": "number"},
+    "currency": {"type": "string", "enum": ["USD", "TWD", "HKD"]},
+    "fees": {"type": "number", "default": 0},
+    "tax": {"type": "number", "default": 0},
+    "source": {"type": "string"},
+    "confirmed_by_user": {"type": "boolean"},
+    "notes": {"type": "string"},
+    "reversal_of": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"action": {"enum": ["buy", "sell", "transfer_in", "transfer_out"]}}},
+      "then": {"required": ["ticker", "market", "quantity", "price"]}
+    },
+    {
+      "if": {"properties": {"action": {"const": "reversal"}}},
+      "then": {"required": ["reversal_of"]}
+    }
+  ]
+}

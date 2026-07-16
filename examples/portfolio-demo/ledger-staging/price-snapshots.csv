@@ -1,0 +1,6 @@
+snapshot_id,as_of_date,ticker,market,price,currency,source,source_url,captured_at,valid_until,notes
+snap_20260715_VOO_01,2026-07-15,VOO,US,480,USD,manual,https://example.com/demo-price-source,2026-07-15T21:05:00Z,2026-07-16,示範資料：虛構收盤價，非真實報價
+snap_20260715_QQQ_01,2026-07-15,QQQ,US,495,USD,manual,https://example.com/demo-price-source,2026-07-15T21:05:00Z,2026-07-16,示範資料：虛構收盤價，非真實報價
+snap_20260715_NVDA_01,2026-07-15,NVDA,US,165,USD,manual,https://example.com/demo-price-source,2026-07-15T21:05:00Z,2026-07-16,示範資料：虛構收盤價，非真實報價
+snap_20260715_AVGO_01,2026-07-15,AVGO,US,265,USD,manual,https://example.com/demo-price-source,2026-07-15T21:05:00Z,2026-07-16,示範資料：虛構收盤價，非真實報價
+snap_20260715_SMH_01,2026-07-15,SMH,US,275,USD,manual,https://example.com/demo-price-source,2026-07-15T21:05:00Z,2026-07-16,示範資料：虛構收盤價，非真實報價

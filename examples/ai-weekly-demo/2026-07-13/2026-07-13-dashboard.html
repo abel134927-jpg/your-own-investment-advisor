@@ -1,0 +1,129 @@
+<!doctype html><html><head><meta charset="utf-8"><title>AI 產業鏈週報 2026-07-13</title><style>
+@page { size: A4 portrait; margin: 0; }
+html, body { margin:0; background:#E8EAEE; -webkit-print-color-adjust:exact; print-color-adjust:exact; color:#111827; font-family:'IBM Plex Sans','Noto Sans TC','Microsoft JhengHei',sans-serif; }
+body { display:flex; flex-direction:column; align-items:center; gap:20px; padding:24px 0; }
+@media print { body { gap:0; padding:0; background:#FBFCFD; } .page { break-after: page; max-height:none; overflow:visible; } }
+.page { width:794px; max-height:1123px; box-sizing:border-box; background:#FBFCFD; padding:36px 44px 48px; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+.header { display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid #E4E7EC; padding-bottom:8px; margin-bottom:16px; font-size:9px; letter-spacing:.12em; color:#8A93A4; text-transform:uppercase; }
+.footer { position:absolute; left:48px; right:48px; bottom:16px; display:flex; justify-content:space-between; font-size:8px; letter-spacing:.1em; color:#AEB6C4; }
+.mono { font-family:'IBM Plex Mono','Consolas',monospace; }
+.kicker { font-size:9px; letter-spacing:.2em; color:#2F5FE0; margin-bottom:4px; }
+.title { font-family:'Noto Serif TC','Microsoft JhengHei',serif; font-size:28px; font-weight:650; margin:0 0 12px; line-height:1.2; }
+.cover-title { font-family:'Noto Serif TC','Microsoft JhengHei',serif; font-size:46px; line-height:1.05; margin:0; }
+.card { background:white; border:1px solid #E4E7EC; border-radius:8px; padding:12px 16px; box-shadow:0 1px 2px rgba(16,23,37,.04); }
+.accent { border-left:3px solid #2F5FE0; }
+.blue { background:#F2F5FD; border-color:#D3E0FA; }
+.red { background:#FCF3F3; border-color:#F1D5D6; }
+.green { background:#F1F8F4; border-color:#CFE7DA; }
+.yellow { background:#FBF6EA; border-color:#EBDCBB; }
+.grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.verdict { font-family:'Noto Serif TC','Microsoft JhengHei',serif; font-size:22px; line-height:1.4; color:#0F1626; }
+.muted { color:#5E6980; }
+.small { font-size:11px; line-height:1.55; }
+.badge { font-family:'Consolas',monospace; font-size:9px; letter-spacing:.06em; padding:3px 8px; border-radius:3px; white-space:nowrap; display:inline-block; }
+.ok { color:#0E7A4B; background:rgba(18,145,90,.10); border:1px solid rgba(18,145,90,.3); }
+.warn { color:#9A6A0F; background:rgba(176,124,21,.10); border:1px solid rgba(176,124,21,.3); }
+.risk { color:#C0343C; background:rgba(206,59,68,.10); border:1px solid rgba(206,59,68,.3); }
+.info { color:#2F5FE0; background:rgba(47,95,224,.08); border:1px solid rgba(47,95,224,.3); }
+table { width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border:1px solid #E4E7EC; border-radius:8px; background:white; font-size:10.5px; }
+th { background:#EEF1F5; color:#8A93A4; font-size:8.5px; letter-spacing:.1em; text-align:left; }
+td, th { padding:8px 10px; border-bottom:1px solid #EDEFF2; vertical-align:top; }
+tr:last-child td { border-bottom:0; }
+.meter { display:flex; gap:3px; width:86px; margin-top:3px; }
+.meter i { height:8px; flex:1; border-radius:2px; }
+.heat-strip { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; }
+.heat-item { text-align:center; background:white; border:1px solid #E4E7EC; border-radius:6px; padding:8px 5px; font-size:9.5px; }
+.dot { width:10px; height:10px; border-radius:50%; margin:0 auto 5px; }
+.thesis-card { background:white; border:1px solid #E4E7EC; border-radius:8px; padding:12px 16px; display:grid; grid-template-columns:1fr auto; gap:10px; margin-bottom:8px; }
+.thesis-card p, .arg p, .event p { margin:.3em 0; color:#5E6980; line-height:1.45; font-size:11px; }
+.event { display:grid; grid-template-columns:52px 1fr auto; gap:10px; background:white; border:1px solid #E4E7EC; border-radius:6px; padding:9px 12px; margin-bottom:6px; }
+.date { color:#8A93A4; font-size:9px; }
+.arg { background:white; border:1px solid #E4E7EC; border-radius:8px; padding:12px; margin-bottom:8px; }
+.evidence { color:#2F5FE0; }
+.redtext { color:#C0343C; }
+.quad { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:10px; flex:1; }
+.quad .card { display:flex; flex-direction:column; gap:6px; }
+.final-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+li { margin-bottom:4px; font-size:11px; }
+.asset { border:1px dashed #C4CBD6; border-radius:8px; background:white; display:flex; align-items:center; justify-content:center; color:#8A93A4; font-size:10px; text-align:center; }
+.asset img { max-width:100%; max-height:100%; object-fit:contain; }
+.asset.placeholder { background:repeating-linear-gradient(45deg,#fff,#fff 8px,#F1F3F6 8px,#F1F3F6 16px); }
+.plot { height:360px; position:relative; border:1px solid #E4E7EC; border-radius:8px; background:linear-gradient(90deg,rgba(18,145,90,.05) 0 50%,rgba(138,147,164,.05) 50%),linear-gradient(0deg,rgba(18,145,90,.05) 0 50%,rgba(176,124,21,.05) 50%); }
+.pt { position:absolute; display:flex; align-items:center; gap:6px; font-size:10px; font-weight:600; }
+.pt i { width:12px; height:12px; border-radius:50%; border:2px solid white; box-shadow:0 0 0 1px currentColor; background:currentColor; }
+ul { margin:4px 0 0 16px; padding:0; }
+</style></head><body>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>2026-07-13</div></div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:32px"><div><div class="kicker mono">本週研究備忘</div><h1 class="cover-title">AI 產業鏈週報</h1><div class="mono muted" style="font-size:10px;letter-spacing:.16em;margin-top:10px">AI 產業鏈 · 本週論點狀態</div></div><div class="mono muted" style="text-align:right;font-size:9px;line-height:1.9">結構版本 v1.0<br>可分享研究筆記<br>不構成投資建議</div></div>
+  <div class="card accent" style="margin-top:30px"><div class="mono muted" style="font-size:9px;letter-spacing:.2em;margin-bottom:10px">本週一句話判斷</div><div class="verdict">（示範資料）AI 資本支出擴張趨勢延續，但先進封裝與電力／電網瓶頸的證據強度本週明顯上升，估值面對「優質但貴」板塊仍需嚴守紀律，AI 應用端變現證據依舊是全鏈最弱一環。</div></div>
+  <div class="grid3" style="margin-top:14px"><div class="card"><div class="mono muted">AI 基本面</div><p><span class="badge ok">穩健</span></p><p class="small muted">（示範資料）四大雲端業者本季資本支出年增仍落在 32%–38% 區間，與上期判斷一致，訂單能見度未見系統性惡化。</p></div><div class="card"><div class="mono muted">估值狀態</div><p><span class="badge warn">偏貴</span></p><p class="small muted">（示範資料）GPU／自研晶片與 HBM 板塊本益比續處歷史高檔，市場對未來三年成長已計入相當樂觀假設。</p></div><div class="card"><div class="mono muted">泡沫風險</div><p><span class="badge warn">中</span></p><p class="small muted">（示範資料）泡沫風險集中在「AI 應用變現」故事型標的，基礎設施層（電力、記憶體）現金流證據仍相對紮實。</p></div></div>
+  <div class="grid2" style="margin-top:12px"><div class="card"><div class="mono muted">▲ 最強板塊</div><h3 style="color:#0E7A4B">HBM／記憶體</h3><p class="small muted">（示範資料）先進封裝（CoWoS）產能擴產進度落後原訂計畫，供給吃緊程度較上期更嚴重，訂價權持續向供應端傾斜。</p></div><div class="card"><div class="mono muted">▼ 最需警戒</div><h3 style="color:#C0343C">AI 應用變現</h3><p class="small muted">（示範資料）多數 AI 應用故事仍缺乏經審計（audited）之變現數字，付費轉換率證據薄弱，為本期最需警戒板塊。</p></div></div>
+  <div class="card blue" style="margin-top:12px"><div class="mono" style="color:#2F5FE0;letter-spacing:.2em;font-size:9px">本週反共識</div><p>（示範資料）市場多將電力／電網瓶頸視為長期議題，但本期出現多起具體案例顯示電網並網延遲已實質推遲資料中心新建計畫，這是一個被低估的短期供給面風險，而非單純的長期敘事。</p></div>
+  <div style="margin-top:auto"><div class="mono muted" style="font-size:9px;letter-spacing:.16em;margin-bottom:8px">產業鏈熱度帶</div><div class="heat-strip"><div class='heat-item'><div class='dot' style='background:#CE3B44'></div><b>HBM／記憶體</b><br><span class='mono muted'>過熱</span></div><div class='heat-item'><div class='dot' style='background:#C4652A'></div><b>光通訊／網路</b><br><span class='mono muted'>偏熱</span></div><div class='heat-item'><div class='dot' style='background:#C4652A'></div><b>電力／電網／散熱</b><br><span class='mono muted'>偏熱</span></div><div class='heat-item'><div class='dot' style='background:#C4652A'></div><b>超大規模雲端 AI</b><br><span class='mono muted'>偏熱</span></div><div class='heat-item'><div class='dot' style='background:#CE3B44'></div><b>GPU／自研晶片</b><br><span class='mono muted'>過熱</span></div><div class='heat-item'><div class='dot' style='background:#2F5FE0'></div><b>AI 應用變現</b><br><span class='mono muted'>偏冷</span></div></div></div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 01 / 10 頁</span></div>
+</section>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>第 02 / 10 頁</div></div>
+  <div class="kicker mono">第 02 節</div>
+  <h2 class="title">AI 產業鏈熱力圖</h2>
+  <p class='muted'>熱度＝市場擁擠度與定價完美度，不等於基本面好壞。</p><table><tr><th>位置</th><th>板塊</th><th>熱度</th><th>溫度計</th><th>本週關鍵訊號</th></tr><tr><td>超配（結構性瓶頸）</td><td><b>HBM／記憶體</b></td><td><span class='badge risk'>過熱 5</span></td><td><div class="meter"><i style="background:#CE3B44"></i><i style="background:#CE3B44"></i><i style="background:#CE3B44"></i><i style="background:#CE3B44"></i><i style="background:#CE3B44"></i></div></td><td>現貨與合約價同步走高，先進封裝產能仍是全鏈最緊瓶頸（示範資料）<br><span class='muted mono'>MU、SK 海力士（示範）、三星（示範）</span></td></tr><tr><td>精選／現金流檢驗</td><td><b>光通訊／網路</b></td><td><span class='badge info'>偏熱 4</span></td><td><div class="meter"><i style="background:#C4652A"></i><i style="background:#C4652A"></i><i style="background:#C4652A"></i><i style="background:#C4652A"></i><i style="background:#E5E9EF"></i></div></td><td>800G 轉換動能短期放緩，但長期升級方向未變（示範資料）<br><span class='muted mono'>COHR、LITE（示範）</span></td></tr><tr><td>超配但守估值紀律</td><td><b>電力／電網／散熱</b></td><td><span class='badge info'>偏熱 4</span></td><td><div class="meter"><i style="background:#C4652A"></i><i style="background:#C4652A"></i><i style="background:#C4652A"></i><i style="background:#C4652A"></i><i style="background:#E5E9EF"></i></div></td><td>電網並網延遲首次實質推遲資料中心新建計畫上線時程（示範資料）<br><span class='muted mono'>VRT、ETN（示範）</span></td></tr><tr><td>超配（結構性瓶頸）</td><td><b>超大規模雲端 AI</b></td><td><span class='badge info'>偏熱 4</span></td><td><div class="meter"><i style="background:#C4652A"></i><i style="background:#C4652A"></i><i style="background:#C4652A"></i><i style="background:#C4652A"></i><i style="background:#E5E9EF"></i></div></td><td>四大雲端資本支出年增維持 32%–38% 區間，guidance 語氣未轉保守（示範資料）<br><span class='muted mono'>MSFT、GOOGL、AMZN、META（示範）</span></td></tr><tr><td>超配但避免追高</td><td><b>GPU／自研晶片</b></td><td><span class='badge risk'>過熱 5</span></td><td><div class="meter"><i style="background:#CE3B44"></i><i style="background:#CE3B44"></i><i style="background:#CE3B44"></i><i style="background:#CE3B44"></i><i style="background:#CE3B44"></i></div></td><td>估值已計入高度樂觀假設，訂單能見度仍佳但股價波動風險升高（示範資料）<br><span class='muted mono'>NVDA、AVGO（示範）</span></td></tr><tr><td>低配／待證明</td><td><b>AI 應用變現</b></td><td><span class='badge info'>偏冷 2</span></td><td><div class="meter"><i style="background:#2F5FE0"></i><i style="background:#2F5FE0"></i><i style="background:#E5E9EF"></i><i style="background:#E5E9EF"></i><i style="background:#E5E9EF"></i></div></td><td>付費轉換率與單位經濟模型仍缺乏經審計數字支持（示範資料）<br><span class='muted mono'>多數 AI 應用層新創（示範，未列個股）</span></td></tr></table><div class='asset' style='margin-top:16px;height:220px'><img src='../assets/2026-07-13/supply-chain-map.svg' style='max-width:100%;max-height:100%;object-fit:contain' alt='Supply chain map'></div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 02 / 10 頁</span></div>
+</section>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>第 03 / 10 頁</div></div>
+  <div class="kicker mono">第 03 節 · 論點追蹤</div>
+  <h2 class="title">與上週判斷的延續 / 修正</h2>
+  <div style='display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px'><div class="card" style="text-align:center"><div class="mono" style="font-size:24px;color:#2F5FE0">1</div><div class="mono muted">● 延續</div></div><div class="card" style="text-align:center"><div class="mono" style="font-size:24px;color:#2F5FE0">1</div><div class="mono muted">▲ 強化</div></div><div class="card" style="text-align:center"><div class="mono" style="font-size:24px;color:#2F5FE0">1</div><div class="mono muted">▼ 削弱</div></div><div class="card" style="text-align:center"><div class="mono" style="font-size:24px;color:#2F5FE0">1</div><div class="mono muted">✕ 推翻</div></div><div class="card" style="text-align:center"><div class="mono" style="font-size:24px;color:#2F5FE0">1</div><div class="mono muted">◌ 待驗證</div></div></div><div class='thesis-card'><div><b>（示範資料）Hyperscaler 資本支出年增仍將維持在 30%＋高速成長</b><p>本季四大雲端業者資本支出年增仍落在 32%–38% 區間，與上期判斷一致，未見系統性下修訊號。</p><span class='mono muted'>THESIS 更新：維持原判斷：資本支出高速成長趨勢未變。</span></div><span class='badge info'>● 延續</span></div><div class='thesis-card'><div><b>（示範資料）HBM 供給持續吃緊，先進封裝產能是主要瓶頸</b><p>本週新增證據顯示先進封裝（CoWoS）擴產進度落後原訂計畫，瓶頸程度較上期判斷更嚴重。</p><span class='mono muted'>THESIS 更新：強化原判斷：HBM／先進封裝瓶頸論點獲得更多支持證據。</span></div><span class='badge ok'>▲ 強化</span></div><div class='thesis-card'><div><b>（示範資料）光通訊 800G 轉換潮將帶動相關供應鏈營收顯著成長</b><p>部分下游客戶傳出訂單遞延訊號，長期升級方向未變，但短期動能較預期放緩。</p><span class='mono muted'>THESIS 更新：論點方向未變，但短期強度下修，持續觀察下一季訂單能見度。</span></div><span class='badge warn'>▼ 削弱</span></div><div class='thesis-card'><div><b>（示範資料）電力／電網瓶頸短期內不會實質限制資料中心新建計畫</b><p>本週出現多起具體案例顯示電網並網延遲已實質推遲數個資料中心新建計畫的上線時程，原判斷證據不足，予以推翻。</p><span class='mono muted'>THESIS 更新：推翻原判斷：電力／電網已成為短期可觀測的實質瓶頸，非單純長期議題。</span></div><span class='badge risk'>✕ 推翻</span></div><div class='thesis-card'><div><b>（示範資料）AI 應用端付費轉換率是否能支撐目前資本支出規模仍待觀察</b><p>本週尚無足夠新增財報數據可驗證此論點，維持待驗證狀態。</p><span class='mono muted'>THESIS 更新：尚待下一輪財報周期提供更多證據。</span></div><span class='badge info'>◌ 待驗證</span></div><div class='card red' style='margin-top:auto'><b>Thesis 變更規則：不可協商</b><p>Thesis 只能因新事實或明確反證改變；單週股價波動只能影響估值狀態，不能直接改變基本面 thesis。</p></div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 03 / 10 頁</span></div>
+</section>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>第 04 / 10 頁</div></div>
+  <div class="kicker mono">第 04 節 · 重大事件</div>
+  <h2 class="title">本週重大事件</h2>
+  <div class='event'><span class='mono date'>2026-07-14</span><div><b>（示範資料）假設性雲端業者法說會，重申資本支出 guidance</b><p>guidance 措辭是否轉趨保守，是驗證資本支出延續性 thesis 的關鍵訊號。</p></div><span class='badge warn'>中</span></div><div class='event'><span class='mono date'>2026-07-16</span><div><b>（示範資料）假設性先進封裝廠公開擴產進度落後訊息</b><p>直接影響 HBM／記憶體板塊瓶頸強度判斷。</p></div><span class='badge risk'>高</span></div><div class='event'><span class='mono date'>2026-07-20</span><div><b>（示範資料）假設性 FOMC 會前噤聲期，市場預期維持利率不變</b><p>利率路徑影響高成長股折現率與估值容忍度。</p></div><span class='badge warn'>中</span></div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 04 / 10 頁</span></div>
+</section>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>第 05 / 10 頁</div></div>
+  <div class="kicker mono">第 05 節 · 對抗性審查</div>
+  <h2 class="title">藍隊 vs 紅隊</h2>
+  <p class='muted'>每一條論點必須附證據等級。禁止只列自己相信的一邊。</p><div class='grid2' style='flex:1'><div class='card blue'><h3>藍隊 · 多頭</h3><div class='arg'><b>（示範資料）雲端資本支出年增未見系統性下修，訂單能見度延伸至下一年度。</b><p>四大雲端業者最新 guidance 皆維持或上修全年資本支出區間。</p><span class='mono evidence'>●●●</span></div><div class='arg'><b>（示範資料）HBM／先進封裝瓶頸支撐上游供應商訂價權，毛利率有望維持高檔。</b><p>先進封裝擴產進度落後，供給吃緊程度較上期強化。</p><span class='mono evidence'>●●○</span></div><div class='arg'><b>（示範資料）電力瓶頸雖是短期逆風，但長期將轉化為電力基建供應商的結構性成長機會。</b><p>多起資料中心新建計畫延遲案例已浮現，帶動電網升級資本支出討論。</p><span class='mono evidence'>●○○</span></div></div><div class='card red'><h3>紅隊 · 空頭</h3><div class='arg'><b>（示範資料）GPU／自研晶片板塊估值已計入過度樂觀假設，任何 guidance 不如預期都可能觸發估值重定價。</b><p>板塊本益比續處歷史高檔，市場對未來三年成長已計入相當樂觀假設。</p><span class='mono evidence redtext'>●●○</span></div><div class='arg'><b>（示範資料）AI 應用端變現證據薄弱，若付費轉換率持續無法驗證，將回頭衝擊上游資本支出的合理性敘事。</b><p>多數 AI 應用層新創仍缺乏經審計之變現數字。</p><span class='mono evidence redtext'>●●○</span></div><div class='arg'><b>（示範資料）電力／電網瓶頸已從長期敘事轉為短期可觀測風險，可能實質壓抑資料中心上線時程與相關營收認列時間。</b><p>本週出現多起具體案例顯示電網並網延遲已推遲資料中心新建計畫。</p><span class='mono evidence redtext'>●●●</span></div></div></div><div class='card' style='margin-top:14px'><b>淨傾向：</b> 藍隊 55 / 紅隊 45<div style='height:10px;border-radius:5px;background:#EEF1F5;margin-top:10px;overflow:hidden'><div style='height:100%;width:55%;background:#2F5FE0'></div></div></div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 05 / 10 頁</span></div>
+</section>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>第 06 / 10 頁</div></div>
+  <div class="kicker mono">第 06 節 · 估值檢查</div>
+  <h2 class="title">估值 vs 基本面風險地圖</h2>
+  <div class='plot'><span class='muted mono' style='position:absolute;left:12px;top:10px'>優質但貴</span><span class='muted mono' style='position:absolute;right:12px;top:10px'>危險區</span><div class='pt' style='left:25%;top:30%;color:#C4652A'><i></i>HBM／記憶體</div><div class='pt' style='left:45%;top:50%;color:#8A93A4'><i></i>光通訊／網路</div><div class='pt' style='left:35%;top:55%;color:#12915A'><i></i>電力／電網／散熱</div><div class='pt' style='left:20%;top:45%;color:#12915A'><i></i>超大規模雲端 AI</div><div class='pt' style='left:30%;top:18%;color:#C4652A'><i></i>GPU／自研晶片</div><div class='pt' style='left:75%;top:40%;color:#CE3B44'><i></i>AI 應用變現</div></div><table style='margin-top:16px'><tr><th>板塊</th><th>基本面是否支持估值</th><th>風險報酬</th><th>結論</th></tr><tr><td><b>HBM／記憶體</b></td><td>基本面（供給吃緊、訂價權）支持目前估值，但已反映多數已知利多。</td><td>中性偏正：下檔有現金流支撐，上檔需新增供給缺口證據。</td><td><span class='badge ok'>可持有</span></td></tr><tr><td><b>光通訊／網路</b></td><td>基本面部分支持，短期訂單動能轉弱削弱估值論證強度。</td><td>風險報酬轉差：短期動能疑慮尚未反映在股價中。</td><td><span class='badge info'>不加碼</span></td></tr><tr><td><b>電力／電網／散熱</b></td><td>基本面轉強（瓶頸證據增加），但估值尚未完全反映瓶頸溢價。</td><td>風險報酬偏正：基本面上修速度快於估值調整速度。</td><td><span class='badge ok'>可持有</span></td></tr><tr><td><b>超大規模雲端 AI</b></td><td>基本面穩健支持，guidance 未見系統性下修。</td><td>中性：估值與基本面大致同步，無明顯錯價。</td><td><span class='badge ok'>可持有</span></td></tr><tr><td><b>GPU／自研晶片</b></td><td>基本面仍佳，但估值已計入高度樂觀假設，基本面對估值的邊際支持力道減弱。</td><td>風險報酬轉差：任何不如預期的 guidance 都可能觸發估值重定價。</td><td><span class='badge risk'>警戒</span></td></tr><tr><td><b>AI 應用變現</b></td><td>基本面證據薄弱，缺乏經審計變現數字支持目前市場敘事。</td><td>風險報酬最差：估值隱含的樂觀假設遠超過可驗證證據。</td><td><span class='badge risk'>警戒</span></td></tr></table><div class='card blue' style='margin-top:auto'>價格是投票機，本報告只對稱重機負責。</div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 06 / 10 頁</span></div>
+</section>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>第 07 / 10 頁</div></div>
+  <div class="kicker mono">第 07 節 · 需求真實性檢查</div>
+  <h2 class="title">需求真實性檢查</h2>
+  <div class='grid2'><div class='card'><h3 style='color:#0E7A4B'>誰正在賺錢</h3><ul><li>（示範資料）先進封裝／CoWoS 供應商：產能滿載，訂價權向供應端傾斜，毛利率同步走高。</li><li>（示範資料）HBM 原廠：合約價與現貨價同步走高，訂單能見度延伸至下一年度。</li><li>（示範資料）超大規模雲端業者核心雲業務：資本支出雖高，但雲業務本身營收與利潤率同步成長，非單純燒錢擴張。</li></ul></div><div class='card'><h3 style='color:#C0343C'>誰仍在燒錢</h3><ul><li>（示範資料）多數 AI 應用層新創：仍處高額補貼獲客階段，單位經濟模型（unit economics）尚未證明可持續獲利。</li><li>（示範資料）部分光通訊次世代模組新進者：資本支出領先營收認列，現金流仍為負值。</li></ul></div></div><div class='card' style='margin-top:12px'><h3>CAPEX 是否可持續</h3><p>（示範資料）四大雲端業者本季資本支出年增維持 32%–38% 區間，現金流量對資本支出比率（CAPEX／OCF）仍處可負擔範圍，尚未觀察到以舉債方式支撐擴張規模的系統性訊號；guidance 措辭延續穩健，未見保守化轉向。</p><div class='asset' style='height:240px;margin-top:10px'><img src='../assets/2026-07-13/capex-trend.png' style='max-width:100%;max-height:100%;object-fit:contain' alt='CAPEX trend'></div></div><div class='card' style='margin-top:12px'><h3>AI 應用是否真的變現</h3><p>（示範資料）AI 應用層變現證據仍是全鏈最弱一環：多數廠商僅揭露使用者數或互動量等虛榮指標（vanity metrics），缺乏經審計（audited）的付費轉換率與單位毛利數字，本期維持「未證明」判定。</p></div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 07 / 10 頁</span></div>
+</section>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>第 08 / 10 頁</div></div>
+  <div class="kicker mono">第 08 節 · 觀察名單</div>
+  <h2 class="title">觀察名單四象限</h2>
+  <p class='muted'>縱軸：長期信念。橫軸：當前價格吸引力。標的進出象限必須留下紀錄。</p><div class='quad'><div class='card blue'><h3>等待回調</h3><ul><li>NVDA（示範）— 長期信念不變，但目前估值偏貴，等待更好進場點或財報後修正。</li></ul></div><div class='card green'><h3>核心長期</h3><ul><li>VRT（示範）— 電力／散熱基建曝險，瓶頸強化下訂價權提升，估值尚未完全反映。</li><li>MU（示範）— HBM 供給吃緊直接受惠者，現金流證據紮實。</li></ul></div><div class='card red'><h3>過熱警戒</h3><ul><li>多數 AI 應用層新創（示範，未列個股）— 估值隱含樂觀假設遠超過可驗證的變現證據，過熱警戒。</li></ul></div><div class='card yellow'><h3>預期差</h3><ul><li>COHR（示範）— 短期訂單雜訊掩蓋長期 800G 升級趨勢，市場可能過度反應短期動能放緩。</li></ul></div></div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 08 / 10 頁</span></div>
+</section>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>第 09 / 10 頁</div></div>
+  <div class="kicker mono">第 09 節 · 最終判斷</div>
+  <h2 class="title">最終判斷</h2>
+  <div class='final-grid'><div class='card'><h3>我現在相信什麼</h3><p>（示範資料）AI 資本支出擴張趨勢延續，供應鏈上游（HBM、先進封裝、電力基建）的瓶頸強度本期持續強化，是目前全鏈中基本面證據最紮實的一環。</p></div><div class='card'><h3>我懷疑什麼</h3><p>（示範資料）GPU／自研晶片板塊的估值是否已提前反映未來三年的樂觀成長路徑，任何 guidance 不如預期都可能觸發顯著重定價。</p></div><div class='card'><h3>市場可能錯估哪裡</h3><p>（示範資料）市場可能低估電力／電網瓶頸從「長期敘事」轉為「短期可觀測風險」的速度，這對資料中心上線時程與相關營收認列時間可能有實質影響。</p></div><div class='card'><h3>如果我錯了，最可能錯在哪裡</h3><p>（示範資料）如果本期判斷有誤，最可能的錯誤在於高估電力瓶頸的短期衝擊程度——若電網延遲問題透過既有備援產能快速緩解，相關基建溢價的論點將站不住腳。</p></div></div><div class='card accent'><h3>下週最值得觀察的信號</h3><ul><li>（示範資料）下一輪雲端業者法說會的資本支出 guidance 措辭是否轉趨保守。</li><li>（示範資料）先進封裝擴產進度是否進一步落後，或出現追趕跡象。</li><li>（示範資料）是否出現第二起、第三起具體的資料中心新建計畫因電網延遲而延期的案例。</li><li>（示範資料）任一大型 AI 應用廠商是否首次揭露經審計之付費轉換率數字。</li></ul></div><div class='card blue' style='margin-top:14px'><b>（示範資料）AI 資本支出擴張延續，上游瓶頸（HBM、先進封裝、電力）證據本期強化，但 GPU／自研晶片估值已偏貴、AI 應用端變現證據依舊薄弱，維持「基建優於應用」的核心配置傾向，並嚴守估值紀律。</b></div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 09 / 10 頁</span></div>
+</section>
+<section class="page">
+  <div class="header mono"><div>AI 產業鏈週報 · Value Chain Weekly · 第 12 期（示範資料）</div><div>第 10 / 10 頁</div></div>
+  <div class="kicker mono">第 10 節 · 資料來源與聲明</div>
+  <h2 class="title">資料來源與聲明</h2>
+  <div class='card'><h3>一手 / 硬數據</h3><ul><li>（示範資料）四大雲端業者最近一次法說會資本支出 guidance（虛構彙整，非真實財報數字）</li><li>（示範資料）先進封裝／HBM 供應商公開產能與合約價資訊（虛構彙整）</li></ul><h3>觀點來源</h3><ul><li>（示範資料）產業研究機構關於 AI 資本支出週期的季度報告（虛構來源，非真實出版品）</li></ul><h3>市場隱含 / 輔助來源</h3><ul><li>（示範資料）選擇權隱含波動率與板塊資金流向作為市場情緒輔助觀察（虛構彙整，非真實市場數據）</li></ul></div><div class='card red' style='margin-top:16px'><h3>免責聲明</h3><p>本報告為可分享之投資研究筆記，僅供資訊與教育用途，不構成任何證券之買賣建議或投資邀約。文中提及之公司與代號僅為研究框架示例。所有判斷可能出錯；讀者應自行進行盡職調查並為自身決策負責。過往表現不代表未來結果。</p></div>
+  <div class="footer mono"><span>研究與教育用途，不構成投資建議</span><span>第 10 / 10 頁</span></div>
+</section></body></html>

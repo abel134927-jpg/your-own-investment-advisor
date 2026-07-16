@@ -1,0 +1,49 @@
+base_currency: USD
+reference_currency: TWD
+report_language: zh-TW
+
+schedule:
+  trigger: manual   # v1 不排程,由使用者手動觸發「跑本週 Portfolio Weekly」
+  price_as_of_policy: "previous US market close"
+  us_market_holiday_policy: "still publish; clearly label as-of date"
+
+target_allocation:
+  core_long_term: 0.65
+  ai_strategy: 0.30
+  cash: 0.05
+  rebalance_band: 0.05
+  ignore_drift_below: 0.01
+
+benchmarks:
+  total_portfolio: SPY
+  core_long_term: SPY
+  ai_strategy: SMH
+  optional_reference: [QQQ]
+
+risk_limits:
+  single_stock_max_total_portfolio: 0.08
+  single_etf_max_total_portfolio: 0.20
+  weekly_turnover_warning: 0.20
+  weekly_changed_positions_warning: 3
+  new_position_cooldown_weeks: 2
+  new_position_cooldown_max_weeks: 4
+  cash_minimum: 0.03
+
+allowed_universe:
+  v1_markets: [US]
+  v1_asset_types: [Stock, ETF, Cash]
+  disallowed_v1: [Options, Margin, Crypto, Futures]
+
+fx_rates:            # 非 USD 資產換算參考匯率,由使用者/agent 更新
+  HKDUSD: 0.1279
+
+# 示範資料專用:本 config 由 examples/portfolio-demo/ 的 demo 跑法直接以 --config
+# 指向此檔,--portfolio-dir 另外指向 examples/portfolio-demo/ledger-staging/(內含
+# 從 examples/fixtures/demo-transactions.csv、demo-price-snapshots.csv 複製並改名
+# 的 transactions.csv、price-snapshots.csv)。下方 paths 僅供文件參考,腳本一律以
+# --portfolio-dir / --config / --out 三個明確參數為準,不會讀取這裡的 paths 值。
+paths:
+  ledger: examples/portfolio-demo/ledger-staging/transactions.csv
+  holdings: examples/portfolio-demo/ledger-staging/holdings.json
+  price_snapshots: examples/portfolio-demo/ledger-staging/price-snapshots.csv
+  recommendations: examples/portfolio-demo/ledger-staging/recommendations.csv

@@ -1,0 +1,6 @@
+outputs/
+portfolio/
+portfolio-advisor/tests/output/
+__pycache__/
+*.pyc
+.DS_Store

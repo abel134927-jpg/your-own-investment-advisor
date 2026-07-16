@@ -1,0 +1,21 @@
+industry:
+  name_zh: AI 產業鏈
+  name_en: AI Industry Chain
+report_language: zh-TW
+segments:   # heatmap 板塊;en 對應 report-data.json 的 segment 鍵值,zh 用於渲染
+  - { en: "HBM / Memory",            zh: "HBM／記憶體" }
+  - { en: "Optical / Networking",    zh: "光通訊／網路" }
+  - { en: "Power / Grid / Cooling",  zh: "電力／電網／散熱" }
+  - { en: "Hyperscaler Cloud AI",    zh: "超大規模雲端 AI" }
+  - { en: "GPU / Custom Silicon",    zh: "GPU／自研晶片" }
+  - { en: "AI App Monetization",     zh: "AI 應用變現" }
+research_categories:   # 研究段七大必查類別
+  - Hyperscaler CAPEX 與雲端資本支出
+  - AI 變現與應用營收
+  - HBM／記憶體供需
+  - 光通訊／網路
+  - 電力／電網／散熱
+  - 估值與資金擁擠度
+  - 來源品質與反向觀點
+valuation_snapshot_tickers: [NVDA, MSFT, GOOGL, AMZN, META, AVGO, TSM, MU, VRT, SMCI]
+watchlist_categories: [核心長期, 預期差, 過熱警戒, 反向觀察, 事件驅動]

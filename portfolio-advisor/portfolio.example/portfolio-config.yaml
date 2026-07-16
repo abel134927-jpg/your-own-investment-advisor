@@ -1,0 +1,44 @@
+base_currency: USD
+reference_currency: TWD
+report_language: zh-TW
+
+schedule:
+  trigger: manual   # v1 不排程,由使用者手動觸發「跑本週 Portfolio Weekly」
+  price_as_of_policy: "previous US market close"
+  us_market_holiday_policy: "still publish; clearly label as-of date"
+
+target_allocation:
+  core_long_term: 0.65
+  ai_strategy: 0.30
+  cash: 0.05
+  rebalance_band: 0.05
+  ignore_drift_below: 0.01
+
+benchmarks:
+  total_portfolio: SPY
+  core_long_term: SPY
+  ai_strategy: SMH
+  optional_reference: [QQQ]
+
+risk_limits:
+  single_stock_max_total_portfolio: 0.08
+  single_etf_max_total_portfolio: 0.20
+  weekly_turnover_warning: 0.20
+  weekly_changed_positions_warning: 3
+  new_position_cooldown_weeks: 2
+  new_position_cooldown_max_weeks: 4
+  cash_minimum: 0.03
+
+allowed_universe:
+  v1_markets: [US]
+  v1_asset_types: [Stock, ETF, Cash]
+  disallowed_v1: [Options, Margin, Crypto, Futures]
+
+fx_rates:            # 非 USD 資產換算參考匯率,由使用者/agent 更新
+  HKDUSD: 0.1279
+
+paths:
+  ledger: portfolio/transactions.csv
+  holdings: portfolio/holdings.json
+  price_snapshots: portfolio/price-snapshots.csv
+  recommendations: portfolio/recommendations.csv
