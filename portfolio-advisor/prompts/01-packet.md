@@ -80,6 +80,7 @@ python portfolio-advisor/scripts/generate_portfolio_wrapper_packet.py \
 - **§3 Long-term thesis context**：對每檔持倉，查最近一次財報／guidance（財測指引）、重大公司事件，把 `Current evidence` 欄從佔位文字改成實際證據摘要；`Thesis status` 欄此階段固定寫 `待驗證`（五態判斷是主筆的工作，研究員只給證據，不下判斷）。
 - **§4 Fundamentals / valuation add-on**：查最新財報數字、估值（trailing／forward P/E 或對應指標）相對其歷史區間的位置、營收／毛利趨勢、資產負債表／自由現金流概況，逐檔填入表格，取代 `TODO`。
 - **ETF 持倉另外補一段「ETF 前十大成分重疊」小節**（加在 §4 表格下方，是在既有章節底下新增內容，不是改標題，符合上面「H2／H3 為固定 anchor」的規則）：查發行商官網的最新前十大成分股與費用率，並標註與投資組合內其他持倉的重疊風險（例如同時持有一檔大盤 ETF 與該 ETF 前十大成分股之一的個股，兩者曝險會疊加）。
+- **持倉量化證據**（同樣加在 §4 表格下方，新增一段「量化因子與簡單回測」小節，是在既有章節底下新增內容，不是改標題）：對 holdings 中每一檔持倉，依 `common/quant-factors.md` 的規格與 Python 範例，以 yfinance 現場計算五類因子（價格動能／估值／波動環境／利率／週線趨勢），並對每檔持倉與組合整體（按現有權重）做簡單回測——過去 1 年累積報酬 vs SPY、最大回撤。因子表與回測表格式見該檔「輸出格式」一節；回測警語（簡化回測：不含入金時序、稅費、滑價；含存活者偏差；過去績效不代表未來）必須完整附上，不得省略。degraded 規則（`pip install yfinance` 失敗、個別欄位抓不到、完全不可用時退回 WebSearch）同樣依 `common/quant-factors.md`，不得卡住整段研究流程。
 - **§5 Event calendar**：填入每檔持倉未來一週內已知的財報日、CPI／FOMC 等總經事件、ETF 配息／再平衡日期，取代 `TODO`。
 - 對每個關鍵 claim（尤其是看多的理由），主動搜尋一次反向證據——沒有反例也要在該列註明「未找到反例」，不要只列支持性證據。
 - 缺料一律標 `MISSING` 並簡述已嘗試的查詢管道，不得用其他標的的數字推算填補。

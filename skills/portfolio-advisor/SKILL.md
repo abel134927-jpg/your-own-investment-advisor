@@ -20,6 +20,7 @@ description: Use when 用戶要求生成本週投資組合週報、初始化持�
 ```bash
 python --version          # 需 >= 3.10（若指令不存在，改試 python3 --version）
 pip install -r requirements.txt   # 安裝 pillow + pyyaml
+python -c "import yfinance"   # 驗證量化因子計算用的 yfinance 可匯入；失敗就重跑上面的 pip install。量化段會依 common/quant-factors.md 的 degraded 規則自動降級標 MISSING，不會卡住整個流程
 ```
 
 檢查瀏覽器（用於渲染 PDF；找不到不是錯誤，只是會自動降級成只出 HTML）：

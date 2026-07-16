@@ -8,8 +8,8 @@
 
 兩條 pipeline 每次執行完，都會在 `outputs/` 底下留下一份帶圖表的 HTML 報告（找得到瀏覽器的話會多一份可搜尋 PDF），外加一段可以直接轉發的短版摘要。以下是本 repo 內建的**示範資料**（`examples/`，非真實市場資訊，僅供展示排版與結構）：
 
-- **AI 產業鏈週報**：[dashboard HTML](examples/ai-weekly-demo/2026-07-13/2026-07-13-dashboard.html) ・[dashboard PDF](examples/ai-weekly-demo/2026-07-13/2026-07-13-dashboard.pdf) ・[Archive HTML](examples/ai-weekly-demo/2026-07-13/2026-07-13-archive.html)（完整研究記錄）
-- **Portfolio Weekly（投資組合週報）**：[dashboard HTML](examples/portfolio-demo/2026-07-16-portfolio-dashboard.html) ・[dashboard PDF](examples/portfolio-demo/2026-07-16-portfolio-dashboard.pdf)
+- **AI 產業鏈週報**：[dashboard HTML](examples/ai-weekly-demo/2026-07-13/2026-07-13-dashboard.html) ・[dashboard PDF](examples/ai-weekly-demo/2026-07-13/2026-07-13-dashboard.pdf) ・[Archive HTML](examples/ai-weekly-demo/2026-07-13/2026-07-13-archive.html)（完整研究記錄，含 agent 用 yfinance 現場計算的量化因子快照）
+- **Portfolio Weekly（投資組合週報）**：[dashboard HTML](examples/portfolio-demo/2026-07-16-portfolio-dashboard.html) ・[dashboard PDF](examples/portfolio-demo/2026-07-16-portfolio-dashboard.pdf)（含持倉量化因子與簡單回測 vs SPY）
 
 截圖預覽（點圖可看完整 HTML/PDF）：
 

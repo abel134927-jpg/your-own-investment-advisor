@@ -1,2 +1,3 @@
 pillow>=10.0
 pyyaml>=6.0
+yfinance>=0.2   # 量化因子計算用，agent 執行時使用（不進渲染管線）

@@ -6,7 +6,7 @@
 
 - **Python 3.10 以上**：跑渲染腳本用。
 - **Chrome 或 Edge（選用）**：用來把 HTML 報告轉成可搜尋 PDF。沒有的話系統會自動降級成只出 HTML，不是錯誤。
-- 以上兩項都不需要你自己手動裝：一旦你對 agent 說「讀 README 幫我完成安裝」，agent 會依 SKILL.md 的 Step 1（環境自檢）自己檢查 Python 版本、跑 `pip install -r requirements.txt`（安裝 `pillow` + `pyyaml`）、檢查瀏覽器是否存在。如果 Python 本身沒裝，agent 會告訴你去裝 Python（例如從 [python.org](https://www.python.org/) 或系統的套件管理員），這一步無法代勞。
+- 以上兩項都不需要你自己手動裝：一旦你對 agent 說「讀 README 幫我完成安裝」，agent 會依 SKILL.md 的 Step 1（環境自檢）自己檢查 Python 版本、跑 `pip install -r requirements.txt`（安裝圖表用的 `pillow`、設定檔用的 `pyyaml`、量化因子計算用的 `yfinance`）、檢查瀏覽器是否存在。如果 Python 本身沒裝，agent 會告訴你去裝 Python（例如從 [python.org](https://www.python.org/) 或系統的套件管理員），這一步無法代勞。
 
 ## 路徑一：Claude Cowork
 

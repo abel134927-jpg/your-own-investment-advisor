@@ -64,6 +64,10 @@
 
 對 config 內每一檔（目前 10 檔：NVDA／MSFT／GOOGL／AMZN／META／AVGO／TSM／MU／VRT／SMCI）以 WebSearch 查詢並記錄：現價、1 週／1 月報酬率、trailing／forward P/E、市值、52 週價格區間位置。每筆附來源與查詢時間點（as-of）。查不到的欄位標 `MISSING`，不得用其他股票的倍數推算填補。
 
+**Step 2b：量化因子快照**
+
+對同一批 `valuation_snapshot_tickers`，依 `common/quant-factors.md` 的規格與 Python 範例，以 yfinance 現場計算五類因子（價格動能／估值／波動環境／利率／週線趨勢）。VIX（`^VIX`）與利率（`^TNX`）屬宏觀因子，整份 packet 只算一次，不必每檔重複。結果依 `common/quant-factors.md` 的因子表格式整理，寫入 Step 3 packet 結構的 `### 量化因子快照` 小節。degraded 規則（`pip install yfinance` 失敗、個別欄位抓不到、完全不可用時退回 WebSearch）同樣依 `common/quant-factors.md`。
+
 ### Step 3：寫 `research-packet.md`
 
 檔案結構（H2 標題固定，段落內容依研究結果撰寫）：
@@ -80,6 +84,9 @@
 
 ## 矛盾與風險標記
 （本週研究中互相矛盾的證據、或明顯的反向觀點，逐條列出）
+
+### 量化因子快照
+（依 `common/quant-factors.md` 規格，對 valuation_snapshot_tickers 現場以 yfinance 計算五類因子；VIX／利率屬宏觀因子只算一次；因子表格式見該檔「輸出格式」一節；degraded 欄位標 `MISSING`）
 
 ## report_data_inputs
 
