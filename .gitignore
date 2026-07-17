@@ -4,3 +4,8 @@ portfolio-advisor/tests/output/
 __pycache__/
 *.pyc
 .DS_Store
+
+# 本地 agent 配置與筆記,永不入版控
+/CLAUDE.md
+/MEMORY.md
+/.claude/
